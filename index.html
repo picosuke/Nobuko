@@ -6,101 +6,112 @@
   <title>ホームページ</title>
   <style>
     /* ------------------------------
-       全体の基本設定
+       全体の基本設定（06番風）
     ------------------------------ */
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Yu Mincho', 'Sawarabi Mincho', serif; /* 06番の特徴：明朝体 */
+      /* 06番の特徴：全体を明朝体に */
+      font-family: 'Yu Mincho', 'Sawarabi Mincho', serif; 
+      /* 06番の特徴：真っ白ではなく、少しだけ温かみのあるアイボリー背景 */
+      background-color: #f9f9f5;
+      color: #333;
     }
 
     /* ------------------------------
-       画像の一番上にあったストライプ
+       一番上のストライプ柄
     ------------------------------ */
     .top-stripe {
-      height: 12px;
-      /* 薄い水色と白の縦シマシマ */
+      height: 10px;
+      /* 派手な水色から、クラシックで落ち着いたグレーの細いストライプに変更 */
       background: repeating-linear-gradient(
         to right,
-        #cce0ff,
-        #cce0ff 15px,
-        #ffffff 15px,
-        #ffffff 30px
+        #e0e0db,
+        #e0e0db 4px,
+        #f9f9f5 4px,
+        #f9f9f5 8px
       );
-      border-bottom: 3px solid #000; /* 下に黒い太線 */
     }
 
     /* ------------------------------
-       紫のヘッダー部分（06番ベース）
+       ヘッダー部分（06番を完全再現）
     ------------------------------ */
     .header-06 {
       height: 80px;
-      background-color: #9d65ff; /* 画像の紫色 */
-      padding: 0 40px;
+      background-color: #f9f9f5;
+      padding: 0 50px;
       display: flex;
-      justify-content: space-between; /* 左右に分ける */
+      justify-content: space-between;
       align-items: center;
-      border-bottom: 3px solid #000; /* 下に黒い太線 */
+      /* 06番の特徴：上下に細い黒（ダークグレー）の直線を引く */
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
     }
     .header-06 .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: #ffffff;
-      letter-spacing: 2px;
+      font-size: 28px;
+      font-weight: normal; /* 太字をやめて上品に */
+      letter-spacing: 4px; /* 文字の間隔を広げて厳かに */
+      color: #333;
     }
     .header-06 .nav {
       display: flex;
-      gap: 30px; /* メニューの間隔 */
+      gap: 40px; /* メニューの間隔を広めにとる */
     }
     .header-06 .nav a {
-      color: #ffffff;
+      color: #333;
       text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 2px;
       transition: opacity 0.3s;
     }
     .header-06 .nav a:hover {
-      opacity: 0.7; /* マウスを乗せると少し薄くなる */
+      opacity: 0.5; /* マウスを乗せるとフワッと薄くなる */
     }
 
     /* ------------------------------
        自然な写真が入るエリア
     ------------------------------ */
     .hero-area {
-      height: 150px; /* 写真エリアの高さ */
-      /* 画像の緑〜青のグラデーションを再現 */
-      background: linear-gradient(to right, #6ae5b1, #6983ff);
+      height: 400px; /* 写真が入ることを想定して少し高さを出しました */
+      /* ここに後から実際の写真（background-image）を入れます。今は仮のグレー背景 */
+      background-color: #ebebe6; 
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 3px solid #000; /* 下に黒い太線 */
+      border-bottom: 1px solid #ddd;
     }
     .hero-area h1 {
       margin: 0;
-      color: #ffffff;
-      font-size: 40px;
+      color: #999; /* 写真が入るまでの仮の文字なので薄い色に */
+      font-size: 24px;
       font-weight: normal;
-      letter-spacing: 4px;
-      font-family: sans-serif; /* ここだけ画像っぽくゴシック体に */
+      letter-spacing: 6px;
     }
 
     /* ------------------------------
-       ピンクの内容エリア
+       内容エリア
     ------------------------------ */
     .content-area {
-      min-height: 500px; /* 内容エリアの高さ */
-      background-color: #ff6b81; /* 画像のピンク色 */
+      min-height: 500px;
+      background-color: #f9f9f5;
       display: flex;
-      justify-content: center;
-      padding-top: 50px; /* 上からの余白 */
+      flex-direction: column; /* 縦に並べる設定 */
+      align-items: center;
+      padding-top: 80px; /* 上からの余白をたっぷり取る */
     }
     .content-area h2 {
-      margin: 0;
-      color: #ffffff;
-      font-size: 40px;
+      margin: 0 0 20px 0;
+      color: #333;
+      font-size: 28px;
       font-weight: normal;
       letter-spacing: 4px;
-      font-family: sans-serif; /* ここも画像っぽくゴシック体に */
+      border-bottom: 1px solid #333; /* 見出しの下に細い線を引く */
+      padding-bottom: 10px;
+    }
+    .content-area p {
+      color: #555;
+      line-height: 2; /* 行間を広げて読みやすく */
+      letter-spacing: 1px;
     }
 
   </style>
@@ -110,9 +121,9 @@
   <!-- 一番上のストライプ柄 -->
   <div class="top-stripe"></div>
 
-  <!-- ここはヘッダー（06番のレイアウト＋紫色） -->
+  <!-- ここはヘッダー（06番） -->
   <header class="header-06">
-    <div class="logo">教団名/ロゴ</div>
+    <div class="logo">教団名 / ロゴ</div>
     <nav class="nav">
       <a href="#">ホーム</a>
       <a href="#">歴史</a>
@@ -121,14 +132,15 @@
     </nav>
   </header>
 
-  <!-- 自然な写真（グラデーション部分） -->
+  <!-- 自然な写真が入るエリア -->
   <div class="hero-area">
-    <h1>自然な写真</h1>
+    <h1>[ ここに自然な写真が入ります ]</h1>
   </div>
 
-  <!-- ここは内容（ピンク部分） -->
+  <!-- ここは内容 -->
   <main class="content-area">
     <h2>ここは内容</h2>
+    <p>ここに教えや、信者に向けたメッセージが入ります。</p>
   </main>
 
 </body>
