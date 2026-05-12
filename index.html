@@ -6,14 +6,12 @@
   <title>ホームページ</title>
   <style>
     /* ------------------------------
-       全体の基本設定（06番風）
+       全体の基本設定
     ------------------------------ */
     body {
       margin: 0;
       padding: 0;
-      /* 06番の特徴：全体を明朝体に */
       font-family: 'Yu Mincho', 'Sawarabi Mincho', serif; 
-      /* 06番の特徴：真っ白ではなく、少しだけ温かみのあるアイボリー背景 */
       background-color: #f9f9f5;
       color: #333;
     }
@@ -22,8 +20,7 @@
        一番上のストライプ柄
     ------------------------------ */
     .top-stripe {
-      height: 10px;
-      /* 派手な水色から、クラシックで落ち着いたグレーの細いストライプに変更 */
+      height: 12px;
       background: repeating-linear-gradient(
         to right,
         #e0e0db,
@@ -34,46 +31,41 @@
     }
 
     /* ------------------------------
-       ヘッダー部分（06番を完全再現）
+       ヘッダー部分（中央寄せ・余白たっぷり）
     ------------------------------ */
     .header-06 {
-      height: 80px;
+      height: 100px; /* 文字を大きくしたので、縦幅も少し広げました */
       background-color: #f9f9f5;
-      padding: 0 50px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* メニューを完全に「ど真ん中」に配置 */
       align-items: center;
-      /* 06番の特徴：上下に細い黒（ダークグレー）の直線を引く */
-      border-top: 1px solid #333;
-      border-bottom: 1px solid #333;
+      border-top: 1px solid #ccc; /* 線の色を少し柔らかくしました */
+      border-bottom: 1px solid #ccc;
     }
-    .header-06 .logo {
-      font-size: 28px;
-      font-weight: normal; /* 太字をやめて上品に */
-      letter-spacing: 4px; /* 文字の間隔を広げて厳かに */
-      color: #333;
-    }
+    
     .header-06 .nav {
       display: flex;
-      gap: 40px; /* メニューの間隔を広めにとる */
+      gap: 70px; /* メニュー同士の隙間をガッツリ広げました */
     }
+    
     .header-06 .nav a {
       color: #333;
       text-decoration: none;
-      font-size: 16px;
-      letter-spacing: 2px;
-      transition: opacity 0.3s;
+      font-size: 20px; /* 文字サイズを大きく */
+      letter-spacing: 4px; /* 1文字ごとの間隔を広げてゆったり見せる */
+      transition: color 0.3s;
     }
+    
+    /* マウスを乗せた時のアクション */
     .header-06 .nav a:hover {
-      opacity: 0.5; /* マウスを乗せるとフワッと薄くなる */
+      color: #888; /* 薄くなるように変更 */
     }
 
     /* ------------------------------
        自然な写真が入るエリア
     ------------------------------ */
     .hero-area {
-      height: 400px; /* 写真が入ることを想定して少し高さを出しました */
-      /* ここに後から実際の写真（background-image）を入れます。今は仮のグレー背景 */
+      height: 400px;
       background-color: #ebebe6; 
       display: flex;
       justify-content: center;
@@ -82,7 +74,7 @@
     }
     .hero-area h1 {
       margin: 0;
-      color: #999; /* 写真が入るまでの仮の文字なので薄い色に */
+      color: #999;
       font-size: 24px;
       font-weight: normal;
       letter-spacing: 6px;
@@ -95,9 +87,9 @@
       min-height: 500px;
       background-color: #f9f9f5;
       display: flex;
-      flex-direction: column; /* 縦に並べる設定 */
+      flex-direction: column;
       align-items: center;
-      padding-top: 80px; /* 上からの余白をたっぷり取る */
+      padding-top: 80px;
     }
     .content-area h2 {
       margin: 0 0 20px 0;
@@ -105,12 +97,12 @@
       font-size: 28px;
       font-weight: normal;
       letter-spacing: 4px;
-      border-bottom: 1px solid #333; /* 見出しの下に細い線を引く */
+      border-bottom: 1px solid #333;
       padding-bottom: 10px;
     }
     .content-area p {
       color: #555;
-      line-height: 2; /* 行間を広げて読みやすく */
+      line-height: 2;
       letter-spacing: 1px;
     }
 
@@ -121,9 +113,8 @@
   <!-- 一番上のストライプ柄 -->
   <div class="top-stripe"></div>
 
-  <!-- ここはヘッダー（06番） -->
+  <!-- ここはヘッダー（ロゴを消してメニューのみに） -->
   <header class="header-06">
-    <div class="logo">教団名 / ロゴ</div>
     <nav class="nav">
       <a href="#">ホーム</a>
       <a href="#">歴史</a>
