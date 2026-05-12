@@ -27,6 +27,15 @@
     .content-area { min-height: 500px; background-color: #f9f9f5; display: flex; flex-direction: column; align-items: center; padding-top: 80px; }
     .content-area h2 { margin: 0 0 20px 0; color: #333; font-size: 28px; font-weight: normal; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 10px; }
     .content-area p { color: #555; line-height: 2; letter-spacing: 1px; }
+    
+    #chat-container { width: 100%; max-width: 600px; margin: 20px auto; background: #fff; border: 1px solid #ccc; padding: 20px; }
+    #messages { height: 300px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 10px; padding: 10px; text-align: left; }
+    .msg { margin-bottom: 10px; font-size: 14px; }
+    .msg-name { font-weight: bold; color: #555; margin-right: 10px; }
+    .chat-input { display: flex; gap: 10px; }
+    #user-name { width: 80px; }
+    #message-input { flex-grow: 1; }
+    
   </style>
 </head>
 <body>
@@ -62,7 +71,16 @@
 
   <div id="discussion" class="page-section">
     <div class="hero-area" style="background-color: #d6d9d1;"><h1>[ 集会の写真 ]</h1></div>
-    <main class="content-area"><h2>話し合いの場</h2><p>意見交換を行うスペースです。</p></main>
+    <main class="content-area">
+      <div id="chat-container">
+        <div id="messages"></div>
+        <div class="chat-input">
+          <input type="text" id="user-name" placeholder="名無し">
+          <input type="text" id="message-input" placeholder="メッセージを入力...">
+          <button id="send-btn">送信</button>
+        </div>
+      </div>
+    </main>
   </div>
 
   <!-- ▼▼▼ JSも超シンプルになりました ▼▼▼ -->
@@ -90,6 +108,60 @@
     
     // メニューをクリックして、URLの #○○ が変わった時に実行する
     window.addEventListener('hashchange', showSection);
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    // ★ここに、Firebaseでコピーした自分の Config を貼り付けてください
+    const firebaseConfig = {
+      apiKey: "AIzaSyAPUhjD7Zg8togYokPISJcFYvvoRJBcIkk",
+      authDomain: "nobuko-f3d50.firebaseapp.com",
+      projectId: "nobuko-f3d50",
+      storageBucket: "nobuko-f3d50.firebasestorage.app",
+      messagingSenderId: "58905285751",
+      appId: "1:58905285751:web:66c687031ad8a9a746e272",
+      measurementId: "G-J9GSF1LFRC"
+    };
+
+    // Firebaseの初期化
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // HTMLの要素を取得
+    const messageInput = document.getElementById('message-input');
+    const nameInput = document.getElementById('user-name');
+    const sendBtn = document.getElementById('send-btn');
+    const messagesDiv = document.getElementById('messages');
+
+    // メッセージを送る関数
+    sendBtn.addEventListener('click', async () => {
+      const text = messageInput.value;
+      const name = nameInput.value || "名無しの信者";
+      if (text === "") return;
+
+      await addDoc(collection(db, "messages"), {
+        name: name,
+        text: text,
+        timestamp: serverTimestamp()
+      });
+      messageInput.value = "";
+    });
+
+    // メッセージをリアルタイムで受け取って表示する
+    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+    onSnapshot(q, (snapshot) => {
+      messagesDiv.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const div = document.createElement('div');
+        div.className = 'msg';
+        div.innerHTML = `<span class="msg-name">${data.name}:</span><span>${data.text}</span>`;
+        messagesDiv.appendChild(div);
+      });
+      messagesDiv.scrollTop = messagesDiv.scrollHeight; // 自動スクロール
+    });
   </script>
 
 </body>
