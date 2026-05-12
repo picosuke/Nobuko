@@ -27,14 +27,112 @@
     .content-area { min-height: 500px; background-color: #f9f9f5; display: flex; flex-direction: column; align-items: center; padding-top: 80px; }
     .content-area h2 { margin: 0 0 20px 0; color: #333; font-size: 28px; font-weight: normal; letter-spacing: 4px; border-bottom: 1px solid #333; padding-bottom: 10px; }
     .content-area p { color: #555; line-height: 2; letter-spacing: 1px; }
-    
-    #chat-container { width: 100%; max-width: 600px; margin: 20px auto; background: #fff; border: 1px solid #ccc; padding: 20px; }
-    #messages { height: 300px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 10px; padding: 10px; text-align: left; }
-    .msg { margin-bottom: 10px; font-size: 14px; }
-    .msg-name { font-weight: bold; color: #555; margin-right: 10px; }
-    .chat-input { display: flex; gap: 10px; }
-    #user-name { width: 80px; }
-    #message-input { flex-grow: 1; }
+    /* チャット全体のデザイン（06番風） */
+#chat-wrapper {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Yu Mincho', serif;
+}
+
+#messages-list {
+  height: 500px;
+  overflow-y: auto;
+  background-color: #fdfdfb;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* 個別のメッセージ箱 */
+.message-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.msg-info {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.msg-text {
+  font-size: 17px;
+  color: #333;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+/* いいねボタンのデザイン */
+.like-area {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.like-btn {
+  background: none;
+  border: 1px solid #ccc;
+  color: #888;
+  cursor: pointer;
+  padding: 2px 10px;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+
+.like-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* 入力エリア */
+.chat-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f4f4f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+#user-name { width: 120px; padding: 10px; border: 1px solid #ccc; font-family: inherit; }
+#message-input { flex-grow: 1; padding: 10px; border: 1px solid #ccc; font-family: inherit; }
+
+#send-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 2px;
+}
+
+/* 管理用：全消しボタン */
+.admin-area {
+  margin-top: 40px;
+  text-align: right;
+}
+
+#delete-all-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+}
+#delete-all-btn:hover { color: #a00; }
     
   </style>
 </head>
@@ -72,12 +170,22 @@
   <div id="discussion" class="page-section">
     <div class="hero-area" style="background-color: #d6d9d1;"><h1>[ 集会の写真 ]</h1></div>
     <main class="content-area">
-      <div id="chat-container">
-        <div id="messages"></div>
-        <div class="chat-input">
-          <input type="text" id="user-name" placeholder="名無し">
-          <input type="text" id="message-input" placeholder="メッセージを入力...">
-          <button id="send-btn">送信</button>
+      <div id="chat-wrapper">
+        <!-- メッセージが表示される箱 -->
+        <div id="messages-list"></div>
+
+        <!-- 入力エリア -->
+        <div class="chat-controls">
+          <div class="input-row">
+            <input type="text" id="user-name" placeholder="名前（名無しの信者）">
+            <input type="text" id="message-input" placeholder="言葉を刻む...">
+            <button id="send-btn">送信</button>
+          </div>
+        </div>
+
+        <!-- 管理用：全消しボタン（ひっそり配置） -->
+        <div class="admin-area">
+          <button id="delete-all-btn">記録を浄化する（全削除）</button>
         </div>
       </div>
     </main>
@@ -111,57 +219,85 @@
   </script>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, updateDoc, doc, increment, getDocs, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-    // ★ここに、Firebaseでコピーした自分の Config を貼り付けてください
-    const firebaseConfig = {
-      apiKey: "AIzaSyAPUhjD7Zg8togYokPISJcFYvvoRJBcIkk",
-      authDomain: "nobuko-f3d50.firebaseapp.com",
-      projectId: "nobuko-f3d50",
-      storageBucket: "nobuko-f3d50.firebasestorage.app",
-      messagingSenderId: "58905285751",
-      appId: "1:58905285751:web:66c687031ad8a9a746e272",
-      measurementId: "G-J9GSF1LFRC"
-    };
+const firebaseConfig = {
+  // ★ここに自分の設定を貼り付け！
+};
 
-    // Firebaseの初期化
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    // HTMLの要素を取得
-    const messageInput = document.getElementById('message-input');
-    const nameInput = document.getElementById('user-name');
-    const sendBtn = document.getElementById('send-btn');
-    const messagesDiv = document.getElementById('messages');
+const messagesList = document.getElementById('messages-list');
+const messageInput = document.getElementById('message-input');
+const nameInput = document.getElementById('user-name');
+const sendBtn = document.getElementById('send-btn');
+const deleteAllBtn = document.getElementById('delete-all-btn');
 
-    // メッセージを送る関数
-    sendBtn.addEventListener('click', async () => {
-      const text = messageInput.value;
-      const name = nameInput.value || "名無しの信者";
-      if (text === "") return;
+// メッセージ送信
+sendBtn.addEventListener('click', async () => {
+  const text = messageInput.value;
+  const name = nameInput.value || "無名の信者";
+  if (!text) return;
 
-      await addDoc(collection(db, "messages"), {
-        name: name,
-        text: text,
-        timestamp: serverTimestamp()
-      });
-      messageInput.value = "";
-    });
+  await addDoc(collection(db, "messages"), {
+    name: name,
+    text: text,
+    likes: 0,
+    timestamp: serverTimestamp()
+  });
+  messageInput.value = "";
+});
 
-    // メッセージをリアルタイムで受け取って表示する
-    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
-    onSnapshot(q, (snapshot) => {
-      messagesDiv.innerHTML = "";
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const div = document.createElement('div');
-        div.className = 'msg';
-        div.innerHTML = `<span class="msg-name">${data.name}:</span><span>${data.text}</span>`;
-        messagesDiv.appendChild(div);
-      });
-      messagesDiv.scrollTop = messagesDiv.scrollHeight; // 自動スクロール
-    });
+// リアルタイム表示（番号表示対応）
+const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+onSnapshot(q, (snapshot) => {
+  messagesList.innerHTML = "";
+  let index = 1; // メッセージ番号
+  
+  snapshot.forEach((messageDoc) => {
+    const data = messageDoc.data();
+    const id = messageDoc.id;
+    
+    const div = document.createElement('div');
+    div.className = 'message-item';
+    div.innerHTML = `
+      <div class="msg-info">
+        <span>第 ${index} 柱</span>
+        <span>${data.name}</span>
+      </div>
+      <div class="msg-text">${data.text}</div>
+      <div class="like-area">
+        <button class="like-btn" onclick="addLike('${id}')">奉納 (いいね) ${data.likes || 0}</button>
+      </div>
+    `;
+    messagesList.appendChild(div);
+    index++;
+  });
+  messagesList.scrollTop = messagesList.scrollHeight;
+});
+
+// いいね機能
+window.addLike = async (id) => {
+  const docRef = doc(db, "messages", id);
+  await updateDoc(docRef, {
+    likes: increment(1)
+  });
+};
+
+// 全消し機能（注意：すべて消えます）
+deleteAllBtn.addEventListener('click', async () => {
+  if (!confirm("すべての話し合いの記録を抹消しますか？")) return;
+  
+  const snapshot = await getDocs(collection(db, "messages"));
+  const batch = writeBatch(db);
+  snapshot.forEach((doc) => {
+    batch.delete(doc.ref);
+  });
+  await batch.commit();
+  alert("記録は浄化されました。");
+});
   </script>
 
 </body>
