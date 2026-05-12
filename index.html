@@ -16,54 +16,70 @@
       color: #333;
     }
 
-    /* ------------------------------
-       一番上のストライプ柄
-    ------------------------------ */
     .top-stripe {
       height: 12px;
-      background: repeating-linear-gradient(
-        to right,
-        #e0e0db,
-        #e0e0db 4px,
-        #f9f9f5 4px,
-        #f9f9f5 8px
-      );
+      background: repeating-linear-gradient(to right, #e0e0db, #e0e0db 4px, #f9f9f5 4px, #f9f9f5 8px);
     }
 
     /* ------------------------------
-       ヘッダー部分（中央寄せ・余白たっぷり）
+       ヘッダー部分
     ------------------------------ */
     .header-06 {
-      height: 100px; /* 文字を大きくしたので、縦幅も少し広げました */
+      height: 90px;
       background-color: #f9f9f5;
+      padding: 0 10%; 
       display: flex;
-      justify-content: center; /* メニューを完全に「ど真ん中」に配置 */
+      justify-content: space-between;
       align-items: center;
-      border-top: 1px solid #ccc; /* 線の色を少し柔らかくしました */
+      border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
     }
-    
+    .header-06 .logo {
+      font-size: 28px;
+      font-weight: normal;
+      letter-spacing: 4px;
+      color: #333;
+    }
     .header-06 .nav {
       display: flex;
-      gap: 70px; /* メニュー同士の隙間をガッツリ広げました */
+      gap: 60px; 
+      margin-right: 30px; 
     }
-    
     .header-06 .nav a {
       color: #333;
       text-decoration: none;
-      font-size: 20px; /* 文字サイズを大きく */
-      letter-spacing: 4px; /* 1文字ごとの間隔を広げてゆったり見せる */
-      transition: color 0.3s;
+      font-size: 18px; 
+      letter-spacing: 3px;
+      transition: all 0.3s;
+      padding-bottom: 5px; /* 下線との隙間 */
+      border-bottom: 1px solid transparent; /* 最初は透明な下線 */
     }
     
-    /* マウスを乗せた時のアクション */
-    .header-06 .nav a:hover {
-      color: #888; /* 薄くなるように変更 */
+    /* マウスを乗せた時と、今選ばれているメニューのスタイル */
+    .header-06 .nav a:hover,
+    .header-06 .nav a.active {
+      color: #888;
+      border-bottom: 1px solid #888; /* 今開いているメニューに下線を出す */
     }
 
     /* ------------------------------
-       自然な写真が入るエリア
+       切り替わるコンテンツ部分の共通設定
     ------------------------------ */
+    .page-section {
+      display: none; /* 基本はすべて隠しておく */
+      animation: fadeIn 0.8s ease-in-out; /* フワッと表示させるアニメーション */
+    }
+    .page-section.active {
+      display: block; /* activeというクラスが付いた時だけ表示する */
+    }
+
+    /* フワッと表示させるアニメーションの設定 */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 写真エリアの設定 */
     .hero-area {
       height: 400px;
       background-color: #ebebe6; 
@@ -80,9 +96,7 @@
       letter-spacing: 6px;
     }
 
-    /* ------------------------------
-       内容エリア
-    ------------------------------ */
+    /* 内容エリアの設定 */
     .content-area {
       min-height: 500px;
       background-color: #f9f9f5;
@@ -105,34 +119,100 @@
       line-height: 2;
       letter-spacing: 1px;
     }
-
   </style>
 </head>
 <body>
 
-  <!-- 一番上のストライプ柄 -->
   <div class="top-stripe"></div>
 
-  <!-- ここはヘッダー（ロゴを消してメニューのみに） -->
+  <!-- ヘッダー（data-targetで切り替える先を指定しています） -->
   <header class="header-06">
+    <div class="logo">教団名 / ロゴ</div>
     <nav class="nav">
-      <a href="#">ホーム</a>
-      <a href="#">歴史</a>
-      <a href="#">のぶ子信者</a>
-      <a href="#">話し合い</a>
+      <a href="#" class="menu-btn active" data-target="sec-home">ホーム</a>
+      <a href="#" class="menu-btn" data-target="sec-history">歴史</a>
+      <a href="#" class="menu-btn" data-target="sec-nobuko">のぶ子信者</a>
+      <a href="#" class="menu-btn" data-target="sec-discussion">話し合い</a>
     </nav>
   </header>
 
-  <!-- 自然な写真が入るエリア -->
-  <div class="hero-area">
-    <h1>[ ここに自然な写真が入ります ]</h1>
+  <!-- ▼▼▼ ここから切り替わるコンテンツの中身 ▼▼▼ -->
+  
+  <!-- 1. ホームの画面 -->
+  <div id="sec-home" class="page-section active">
+    <div class="hero-area">
+      <h1>[ ここに自然な写真が入ります ]</h1>
+    </div>
+    <main class="content-area">
+      <h2>ホーム</h2>
+      <p>ここはメインの入り口です。歓迎の言葉などを入れます。</p>
+    </main>
   </div>
 
-  <!-- ここは内容 -->
-  <main class="content-area">
-    <h2>ここは内容</h2>
-    <p>ここに教えや、信者に向けたメッセージが入ります。</p>
-  </main>
+  <!-- 2. 歴史の画面 -->
+  <div id="sec-history" class="page-section">
+    <div class="hero-area" style="background-color: #e0e0db;">
+      <h1>[ 古い記録の写真など ]</h1>
+    </div>
+    <main class="content-area">
+      <h2>教団の歴史</h2>
+      <p>創設からの歩み、過去の出来事などをここに記します。</p>
+    </main>
+  </div>
+
+  <!-- 3. のぶ子信者の画面 -->
+  <div id="sec-nobuko" class="page-section">
+    <div class="hero-area" style="background-color: #d1cbcb;">
+      <h1>[ 象徴的な写真・シンボル ]</h1>
+    </div>
+    <main class="content-area">
+      <h2>のぶ子信者について</h2>
+      <p>選ばれし信者たちの心得や、教えについて語る場所です。</p>
+    </main>
+  </div>
+
+  <!-- 4. 話し合いの画面 -->
+  <div id="sec-discussion" class="page-section">
+    <div class="hero-area" style="background-color: #d6d9d1;">
+      <h1>[ 集会の風景写真など ]</h1>
+    </div>
+    <main class="content-area">
+      <h2>話し合いの場</h2>
+      <p>今後の活動や、意見交換を行うためのスペースです。</p>
+    </main>
+  </div>
+
+  <!-- ▲▲▲ 切り替わるコンテンツここまで ▲▲▲ -->
+
+  <!-- ▼▼▼ 画面を切り替えるためのJavaScript ▼▼▼ -->
+  <script>
+    // メニューのボタンと、切り替わる画面をすべて取得
+    const menuBtns = document.querySelectorAll('.menu-btn');
+    const sections = document.querySelectorAll('.page-section');
+
+    // メニューボタンそれぞれにクリックした時の動きを設定
+    menuBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault(); // クリックした時に画面が一番上にカクッと戻るのを防ぐ
+
+        // 1. 今選ばれているメニューの「active」を外して、クリックしたものに付ける
+        menuBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        // 2. 切り替え先のIDを取得（例：sec-history）
+        const targetId = this.getAttribute('data-target');
+
+        // 3. すべての画面を一度隠して、目的の画面だけを表示する
+        sections.forEach(sec => {
+          if (sec.id === targetId) {
+            sec.classList.add('active');
+          } else {
+            sec.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
