@@ -2,321 +2,134 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ヘッダーデザイン カタログ（18パターン）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ホームページ</title>
   <style>
-    /* 画面全体の見やすさ用設定（背景は薄いグレーにして、ヘッダーを目立たせる） */
+    /* ------------------------------
+       全体の基本設定
+    ------------------------------ */
     body {
-      background-color: #e9ecef;
       margin: 0;
-      padding: 40px;
-      font-family: sans-serif;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .pattern-label {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 8px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-    .header-box {
-      margin-bottom: 60px; /* 各ヘッダーの間の余白 */
+      padding: 0;
+      font-family: 'Yu Mincho', 'Sawarabi Mincho', serif; /* 06番の特徴：明朝体 */
     }
 
-    /* ▼▼▼ ここから各ヘッダーの共通・個別CSS ▼▼▼ */
-    .hdr {
-      width: 100%;
-      box-sizing: border-box;
+    /* ------------------------------
+       画像の一番上にあったストライプ
+    ------------------------------ */
+    .top-stripe {
+      height: 12px;
+      /* 薄い水色と白の縦シマシマ */
+      background: repeating-linear-gradient(
+        to right,
+        #cce0ff,
+        #cce0ff 15px,
+        #ffffff 15px,
+        #ffffff 30px
+      );
+      border-bottom: 3px solid #000; /* 下に黒い太線 */
+    }
+
+    /* ------------------------------
+       紫のヘッダー部分（06番ベース）
+    ------------------------------ */
+    .header-06 {
+      height: 80px;
+      background-color: #9d65ff; /* 画像の紫色 */
+      padding: 0 40px;
       display: flex;
+      justify-content: space-between; /* 左右に分ける */
       align-items: center;
-      transition: all 0.3s;
+      border-bottom: 3px solid #000; /* 下に黒い太線 */
     }
-    .nav { display: flex; }
-    .nav a { text-decoration: none; transition: 0.3s; }
-    .logo { font-weight: bold; }
+    .header-06 .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      letter-spacing: 2px;
+    }
+    .header-06 .nav {
+      display: flex;
+      gap: 30px; /* メニューの間隔 */
+    }
+    .header-06 .nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    .header-06 .nav a:hover {
+      opacity: 0.7; /* マウスを乗せると少し薄くなる */
+    }
 
-    /* 01: スタンダード（白） */
-    .h-01 { height: 70px; background: #fff; padding: 0 40px; justify-content: space-between; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .h-01 .logo { font-size: 24px; color: #111; }
-    .h-01 .nav { gap: 30px; }
-    .h-01 .nav a { color: #555; font-size: 14px; }
+    /* ------------------------------
+       自然な写真が入るエリア
+    ------------------------------ */
+    .hero-area {
+      height: 150px; /* 写真エリアの高さ */
+      /* 画像の緑〜青のグラデーションを再現 */
+      background: linear-gradient(to right, #6ae5b1, #6983ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 3px solid #000; /* 下に黒い太線 */
+    }
+    .hero-area h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: normal;
+      letter-spacing: 4px;
+      font-family: sans-serif; /* ここだけ画像っぽくゴシック体に */
+    }
 
-    /* 02: スタンダード（黒） */
-    .h-02 { height: 70px; background: #111; padding: 0 40px; justify-content: space-between; }
-    .h-02 .logo { font-size: 24px; color: #fff; }
-    .h-02 .nav { gap: 30px; }
-    .h-02 .nav a { color: #aaa; font-size: 14px; }
-    .h-02 .nav a:hover { color: #fff; }
+    /* ------------------------------
+       ピンクの内容エリア
+    ------------------------------ */
+    .content-area {
+      min-height: 500px; /* 内容エリアの高さ */
+      background-color: #ff6b81; /* 画像のピンク色 */
+      display: flex;
+      justify-content: center;
+      padding-top: 50px; /* 上からの余白 */
+    }
+    .content-area h2 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: normal;
+      letter-spacing: 4px;
+      font-family: sans-serif; /* ここも画像っぽくゴシック体に */
+    }
 
-    /* 03: 中央ロゴ・下部メニュー（2段構成） */
-    .h-03 { flex-direction: column; background: #fff; padding: 20px 0; border-bottom: 1px solid #ccc; }
-    .h-03 .logo { font-size: 30px; color: #222; margin-bottom: 15px; letter-spacing: 4px; }
-    .h-03 .nav { gap: 40px; }
-    .h-03 .nav a { color: #333; font-size: 13px; text-transform: uppercase; }
-
-    /* 04: 中央ロゴ・左右メニュー */
-    .h-04 { height: 80px; background: #1a1a1a; padding: 0 40px; justify-content: center; position: relative; }
-    .h-04 .logo { font-size: 26px; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); }
-    .h-04 .nav-left, .h-04 .nav-right { display: flex; gap: 30px; }
-    .h-04 .nav-left { margin-right: auto; }
-    .h-04 .nav-right { margin-left: auto; }
-    .h-04 a { color: #ccc; text-decoration: none; font-size: 14px; }
-
-    /* 05: ボタン強調スタイル */
-    .h-05 { height: 70px; background: #fff; padding: 0 40px; justify-content: space-between; border-top: 4px solid #000; }
-    .h-05 .nav { gap: 30px; align-items: center; }
-    .h-05 .nav a { color: #000; font-size: 14px; }
-    .h-05 .btn { background: #000; color: #fff !important; padding: 10px 20px; border-radius: 4px; }
-
-    /* 06: クラシック・明朝体 */
-    .h-06 { height: 80px; background: #f9f9f5; padding: 0 50px; justify-content: space-between; font-family: 'Yu Mincho', serif; border-top: 1px solid #333; border-bottom: 1px solid #333; }
-    .h-06 .logo { font-size: 28px; color: #333; }
-    .h-06 .nav { gap: 40px; }
-    .h-06 .nav a { color: #333; font-size: 16px; }
-
-    /* 07: ダークレッド（ブランドカラー想定） */
-    .h-07 { height: 60px; background: #5a1010; padding: 0 30px; justify-content: space-between; }
-    .h-07 .logo { font-size: 20px; color: #fff; letter-spacing: 2px; }
-    .h-07 .nav { gap: 25px; }
-    .h-07 .nav a { color: #ecc; font-size: 13px; }
-
-    /* 08: フローティング（浮いているデザイン） */
-    .h-08 { height: 60px; background: rgba(255,255,255,0.9); padding: 0 30px; justify-content: space-between; width: 90%; margin: 0 auto; border-radius: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    .h-08 .logo { color: #111; }
-    .h-08 .nav { gap: 20px; }
-    .h-08 .nav a { color: #555; font-size: 14px; font-weight: bold; }
-
-    /* 09: すべて右寄せ */
-    .h-09 { height: 70px; background: #222; padding: 0 40px; justify-content: flex-end; gap: 50px; }
-    .h-09 .logo { color: #fff; font-size: 20px; border-right: 1px solid #555; padding-right: 50px; }
-    .h-09 .nav { gap: 20px; }
-    .h-09 .nav a { color: #aaa; font-size: 14px; }
-
-    /* 10: メニューに枠線（ボックススタイル） */
-    .h-10 { height: 80px; background: #fff; padding: 0 40px; justify-content: space-between; }
-    .h-10 .logo { font-size: 24px; }
-    .h-10 .nav { gap: 10px; }
-    .h-10 .nav a { color: #000; font-size: 12px; border: 1px solid #000; padding: 8px 16px; }
-
-    /* 11: ホバーで下線アニメーション */
-    .h-11 { height: 70px; background: #fff; padding: 0 40px; justify-content: space-between; border-bottom: 2px solid #eee; }
-    .h-11 .logo { font-size: 22px; }
-    .h-11 .nav { gap: 30px; }
-    .h-11 .nav a { color: #333; font-size: 15px; position: relative; }
-    .h-11 .nav a:hover { box-shadow: 0 2px 0 #000; } /* 簡易的な下線 */
-
-    /* 12: ミニマル・小文字 */
-    .h-12 { height: 100px; background: transparent; padding: 0 20px; justify-content: space-between; font-family: monospace; }
-    .h-12 .logo { font-size: 16px; color: #000; }
-    .h-12 .nav { gap: 40px; }
-    .h-12 .nav a { color: #666; font-size: 12px; letter-spacing: 1px; }
-
-    /* 13: 巨大フォントのインパクト */
-    .h-13 { height: 120px; background: #000; padding: 0 40px; justify-content: space-between; }
-    .h-13 .logo { font-size: 48px; color: #fff; font-weight: 900; letter-spacing: -2px; }
-    .h-13 .nav { gap: 20px; }
-    .h-13 .nav a { color: #fff; font-size: 18px; font-weight: bold; }
-
-    /* 14: モノスペース（タイプライター・ハッカー風） */
-    .h-14 { height: 50px; background: #0a200a; padding: 0 20px; justify-content: flex-start; gap: 60px; font-family: monospace; border-bottom: 1px solid #0f0; }
-    .h-14 .logo { color: #0f0; font-size: 16px; }
-    .h-14 .nav { gap: 20px; }
-    .h-14 .nav a { color: #0a0; font-size: 14px; }
-
-    /* 15: 全体均等割り付け（ジャスティファイ） */
-    .h-15 { height: 60px; background: #fff; padding: 0 40px; justify-content: space-between; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
-    .h-15 .nav { width: 100%; justify-content: space-between; align-items: center; }
-    .h-15 .nav a { color: #555; font-size: 14px; letter-spacing: 2px; }
-
-    /* 16: 黒白反転ホバー */
-    .h-16 { height: 70px; background: #fff; padding: 0; justify-content: space-between; }
-    .h-16 .logo { padding-left: 40px; font-size: 24px; }
-    .h-16 .nav { height: 100%; }
-    .h-16 .nav a { color: #000; font-size: 14px; padding: 0 30px; display: flex; align-items: center; height: 100%; border-left: 1px solid #eee; }
-    .h-16 .nav a:hover { background: #000; color: #fff; }
-
-    /* 17: 上部極細ライン＋左寄せメニュー */
-    .h-17 { height: 60px; background: #fff; padding: 0 40px; justify-content: flex-start; gap: 40px; border-top: 5px solid #222; }
-    .h-17 .logo { font-size: 20px; font-weight: 900; }
-    .h-17 .nav { gap: 20px; }
-    .h-17 .nav a { color: #777; font-size: 13px; }
-
-    /* 18: 究極のミニマル（ロゴと右端に「Menu」の文字だけ） */
-    .h-18 { height: 80px; background: #fff; padding: 0 40px; justify-content: space-between; }
-    .h-18 .logo { font-size: 18px; letter-spacing: 4px; color: #000; }
-    .h-18 .menu-text { font-size: 12px; letter-spacing: 2px; color: #000; cursor: pointer; text-decoration: underline; }
   </style>
 </head>
 <body>
 
-<div class="container">
+  <!-- 一番上のストライプ柄 -->
+  <div class="top-stripe"></div>
 
-  <!-- 01 -->
-  <div class="header-box">
-    <div class="pattern-label">01. スタンダード（白・シンプル）</div>
-    <header class="hdr h-01">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
+  <!-- ここはヘッダー（06番のレイアウト＋紫色） -->
+  <header class="header-06">
+    <div class="logo">教団名/ロゴ</div>
+    <nav class="nav">
+      <a href="#">ホーム</a>
+      <a href="#">歴史</a>
+      <a href="#">のぶ子信者</a>
+      <a href="#">話し合い</a>
+    </nav>
+  </header>
+
+  <!-- 自然な写真（グラデーション部分） -->
+  <div class="hero-area">
+    <h1>自然な写真</h1>
   </div>
 
-  <!-- 02 -->
-  <div class="header-box">
-    <div class="pattern-label">02. スタンダード（黒・重厚感）</div>
-    <header class="hdr h-02">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 03 -->
-  <div class="header-box">
-    <div class="pattern-label">03. 中央ロゴ・2段（権威・伝統的）</div>
-    <header class="hdr h-03">
-      <div class="logo">BRAND NAME</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Service</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 04 -->
-  <div class="header-box">
-    <div class="pattern-label">04. 中央ロゴ・左右メニュー（バランス型）</div>
-    <header class="hdr h-04">
-      <nav class="nav-left"><a href="#">Home</a><a href="#">About</a></nav>
-      <div class="logo">LOGO</div>
-      <nav class="nav-right"><a href="#">News</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 05 -->
-  <div class="header-box">
-    <div class="pattern-label">05. 右端に目立つボタン（参加や登録を促す）</div>
-    <header class="hdr h-05">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">About</a><a href="#">Rule</a><a href="#" class="btn">Join Us</a></nav>
-    </header>
-  </div>
-
-  <!-- 06 -->
-  <div class="header-box">
-    <div class="pattern-label">06. クラシック・明朝体（宗教・歴史的モチーフに合う）</div>
-    <header class="hdr h-06">
-      <div class="logo">組織名</div>
-      <nav class="nav"><a href="#">教義</a><a href="#">歴史</a><a href="#">入信</a></nav>
-    </header>
-  </div>
-
-  <!-- 07 -->
-  <div class="header-box">
-    <div class="pattern-label">07. テーマカラー背景（例：ダークレッド）</div>
-    <header class="hdr h-07">
-      <div class="logo">ORGANIZATION</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 08 -->
-  <div class="header-box">
-    <div class="pattern-label">08. 角丸フローティング（今っぽく浮いているデザイン）</div>
-    <header class="hdr h-08">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 09 -->
-  <div class="header-box">
-    <div class="pattern-label">09. 全て右寄せ（スタイリッシュ・アシンメトリー）</div>
-    <header class="hdr h-09">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 10 -->
-  <div class="header-box">
-    <div class="pattern-label">10. メニュー枠線（ボックススタイル）</div>
-    <header class="hdr h-10">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">HOME</a><a href="#">ABOUT</a><a href="#">CONTACT</a></nav>
-    </header>
-  </div>
-
-  <!-- 11 -->
-  <div class="header-box">
-    <div class="pattern-label">11. マウスオーバーで下線が出る</div>
-    <header class="hdr h-11">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 12 -->
-  <div class="header-box">
-    <div class="pattern-label">12. 余白多め・ミニマル（高級感）</div>
-    <header class="hdr h-12">
-      <div class="logo">logo.</div>
-      <nav class="nav"><a href="#">home</a><a href="#">about</a><a href="#">contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 13 -->
-  <div class="header-box">
-    <div class="pattern-label">13. 巨大フォント（圧倒的なインパクト）</div>
-    <header class="hdr h-13">
-      <div class="logo">SECT.</div>
-      <nav class="nav"><a href="#">HOME</a><a href="#">ABOUT</a></nav>
-    </header>
-  </div>
-
-  <!-- 14 -->
-  <div class="header-box">
-    <div class="pattern-label">14. モノスペース（ハッカー・機密情報風）</div>
-    <header class="hdr h-14">
-      <div class="logo">SYS_ADMIN</div>
-      <nav class="nav"><a href="#">[HOME]</a><a href="#">[DATA]</a><a href="#">[EXIT]</a></nav>
-    </header>
-  </div>
-
-  <!-- 15 -->
-  <div class="header-box">
-    <div class="pattern-label">15. 全体均等割り付け（雑誌風・整然とした美しさ）</div>
-    <header class="hdr h-15">
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><div class="logo">LOGO</div><a href="#">News</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 16 -->
-  <div class="header-box">
-    <div class="pattern-label">16. 黒白反転ブロック（マウスを乗せると色が変わる）</div>
-    <header class="hdr h-16">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 17 -->
-  <div class="header-box">
-    <div class="pattern-label">17. 上部ライン＋左寄せ（企業・かっちり系）</div>
-    <header class="hdr h-17">
-      <div class="logo">LOGO</div>
-      <nav class="nav"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
-    </header>
-  </div>
-
-  <!-- 18 -->
-  <div class="header-box">
-    <div class="pattern-label">18. 究極のミニマル（メニュー文字のみ）</div>
-    <header class="hdr h-18">
-      <div class="logo">THE NAME</div>
-      <div class="menu-text">Menu</div>
-    </header>
-  </div>
-
-</div>
+  <!-- ここは内容（ピンク部分） -->
+  <main class="content-area">
+    <h2>ここは内容</h2>
+  </main>
 
 </body>
 </html>
