@@ -150,6 +150,39 @@
   .next { border-left: 2px dashed #333; margin-top: 80px; }
   .next .year { color: #800; font-size: 28px; }
   .last p { font-style: italic; color: #666; }
+
+/* 「そこらのふざけ方ではありません…」の部分 */
+.catchphrase {
+  font-size: 32px; /* 大きく強調 */
+  line-height: 1.8;
+  color: #111;
+  margin-bottom: 80px; /* 下の文章との間隔 */
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+/* 「ふざけ方」の下線装飾 */
+.catchphrase span {
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+/* 「創造主のぶ子が〜」の本文（22px） */
+.manifesto-body p {
+  font-size: 22px;
+  line-height: 2.2;
+  color: #333;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+/* 一番下の「EST. 300 - 2026」 */
+.home-footer-deco {
+  margin-top: 60px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+  display: inline-block;
+}
     
   </style>
 </head>
@@ -172,7 +205,25 @@
   <!-- ▼ id名を href と同じにするだけです -->
   <div id="home" class="page-section">
     <div class="hero-area"><h1>[ ホームの写真 ]</h1></div>
-    <main class="content-area"><h2>ホーム</h2><p>ここはメインの入り口です。</p></main>
+    <main class="content-area home-manifesto">
+      <div class="manifesto-inner">
+        <p class="catchphrase">
+          そこらのふざけ方ではありません。<br>
+          本気の<span>「ふざけ方」</span>です。
+        </p>
+      
+        <div class="">
+          <p>創造主のぶ子が、人を笑わし楽しませるために世界を創りたもうてより、悠久の刻が流れた。</p>
+          <p>我々は、その聖なる意志を継ぐ者である。</p>
+          <p>ただの娯楽ではない。ただの悪ふざけでもない。</p>
+          <p>全霊を賭した、本気の「ふざけ」こそが、<br>この濁った世界を照らす唯一の光となると我々は確信している。</p>
+        </div>
+
+        <div class="home-footer-deco">
+          <span>EST. 300 - 2026</span>
+        </div>
+      </div>
+    </main>
   </div>
 
   <div id="about" class="page-section">
