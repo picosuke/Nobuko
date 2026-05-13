@@ -361,7 +361,101 @@
     }
 
     /* ============================================================
-       7. パスワード画面スタイル
+   7. 信者ページ専用スタイル (#nobuko)
+============================================================ */
+.believer-container {
+  width: 90%;
+  max-width: 850px;
+  text-align: center;
+}
+
+/* 人数表示 */
+.believer-count-box {
+  margin-bottom: 60px;
+  padding: 40px;
+  background-color: #f0f0eb;
+  border: 1px solid #333;
+}
+
+.count-label {
+  font-size: 18px;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.count-number {
+  font-size: 56px; /* 巨大な数字 */
+  font-weight: bold;
+  letter-spacing: 10px;
+  color: #111;
+}
+
+.count-number span {
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.count-sub {
+  font-size: 14px;
+  color: #888;
+  margin-top: 10px;
+}
+
+/* 信者の声 */
+.voice-section {
+  margin-top: 80px;
+  text-align: left;
+}
+
+.voice-section h3 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: 4px;
+}
+
+.voice-item {
+  margin-bottom: 50px;
+  padding: 30px;
+  border-bottom: 1px dotted #ccc;
+  position: relative;
+}
+
+.voice-item::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-size: 60px;
+  color: #eee;
+  font-family: serif;
+}
+
+.voice-text {
+  font-size: 22px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.voice-name {
+  text-align: right;
+  font-size: 16px;
+  color: #666;
+  letter-spacing: 2px;
+}
+
+.join-guide {
+  margin-top: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #800; /* 少し目を引く色 */
+}
+
+    /* ============================================================
+       8. パスワード画面スタイル
     ============================================================ */
     #password-screen {
       position: fixed;
@@ -554,14 +648,53 @@
     </main>
   </div>
 
-  <!-- のぶ子信者 -->
-  <div id="nobuko" class="page-section">
-    <div class="hero-area" style="background-color: #d1cbcb;"><h1>[ シンボルの写真 ]</h1></div>
-    <main class="content-area">
-      <h2>のぶ子信者について</h2>
-      <p>選ばれし信者たちの心得。</p>
-    </main>
+<!-- のぶ子信者 -->
+<div id="nobuko" class="page-section">
+  <div class="hero-area" style="background-color: #d1cbcb;">
+    <h1>[ 結ばれし魂の群像 ]</h1>
   </div>
+  
+  <main class="content-area">
+    <div class="believer-container">
+      <h2>信者の証</h2>
+      
+      <!-- 信者数カウントエリア -->
+      <div class="believer-count-box">
+        <p class="count-label">現世に顕現せし魂の数</p>
+        <div class="count-number">一二,三四五<span> 柱</span></div>
+        <p class="count-sub">※刻一刻と増殖中</p>
+      </div>
+
+      <div class="description-text">
+        <p>のぶ子信者とは、単なるファンではありません。<br>創造主のぶ子の「笑い」という光を浴び、<br>真の幸福を掴み取った選ばれし者たちの称号です。</p>
+      </div>
+
+      <!-- 信者の声（なってよかったこと） -->
+      <div class="voice-section">
+        <h3>覚醒せし者たちの独白</h3>
+        
+        <div class="voice-item">
+          <p class="voice-text">「以前の私は、ただ呼吸をするだけの機械でした。しかし、のぶ子様に出会い『本気のふざけ』を知ってから、道端の石ころを見るだけで三時間は笑えるようになりました。人生が輝いています。」</p>
+          <p class="voice-name">（三十代・元公務員）</p>
+        </div>
+
+        <div class="voice-item">
+          <p class="voice-text">「のぶ子信者になって一番良かったのは、孤独が消えたことです。目を閉じれば、世界中に散らばる複数ののぶ子様、そして同志たちの笑い声が聞こえてくる。もう、何も怖くありません。」</p>
+          <p class="voice-name">（二十代・学生）</p>
+        </div>
+
+        <div class="voice-item">
+          <p class="voice-text">「全力でふざける。ただそれだけのことが、これほどまでに魂を浄化するとは思いませんでした。昨日の自分よりも、今の自分の方が圧倒的に面白い。それが最高の救済です。」</p>
+          <p class="voice-name">（四十代・実業家）</p>
+        </div>
+      </div>
+
+      <div class="join-guide">
+        <p>あなたの中に眠る「ふざけの芽」を、今こそ開花させるときです。</p>
+      </div>
+    </div>
+  </main>
+</div>
 
   <!-- 話し合い -->
   <div id="discussion" class="page-section">
@@ -589,7 +722,7 @@
 
   <!-- 1. パスワード & ナビゲーションロジック -->
   <script>
-    const SECRET_WORD = "nobuko2026";
+    const SECRET_WORD = "nobuko64";
     const pwBtn = document.getElementById('pw-btn');
     const pwInput = document.getElementById('pw-input');
     const pwScreen = document.getElementById('password-screen');
