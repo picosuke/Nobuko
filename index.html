@@ -66,6 +66,51 @@
 
   #delete-all-btn { color: #ccc; font-size: 14px; margin-top: 20px; cursor: pointer; border:none; background:none; text-decoration:underline; }
     
+  /* 説明ページ用の追加デザイン */
+  .about-container {
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  /* 本文（22pxでゆったり） */
+  .description-text {
+    font-size: 22px;
+    line-height: 2.2;
+    color: #333;
+    letter-spacing: 2px;
+  }
+
+  /* 心得などの囲み枠 */
+  .rules-box {
+    margin: 60px auto;
+    padding: 40px;
+    border: 1px solid #333;
+    background-color: #fff;
+  }
+
+  .rules-box h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+  }
+
+  .rules-box ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    display: inline-block;
+  }
+
+  .rules-box li {
+    margin-bottom: 15px;
+  }
+  
+  .rules-box li::before {
+    content: "・";
+    margin-right: 10px;
+  }
+    
   </style>
 </head>
 <body>
@@ -77,6 +122,7 @@
     <div class="logo">教団名 / ロゴ</div>
     <nav class="nav">
       <a href="#home" class="menu-btn">ホーム</a>
+      <a href="#about" class="menu-btn">説明</a>
       <a href="#history" class="menu-btn">歴史</a>
       <a href="#nobuko" class="menu-btn">のぶ子信者</a>
       <a href="#discussion" class="menu-btn">話し合い</a>
@@ -87,6 +133,34 @@
   <div id="home" class="page-section">
     <div class="hero-area"><h1>[ ホームの写真 ]</h1></div>
     <main class="content-area"><h2>ホーム</h2><p>ここはメインの入り口です。</p></main>
+  </div>
+
+  <div id="about" class="page-section">
+    <div class="hero-area" style="background-color: #e5e5e0;">
+      <h1>[ 説明の画像 ]</h1>
+    </div>
+  
+    <main class="content-area">
+      <div class="about-container">
+        <h2>この場所について</h2>
+      
+        <div class="description-text">
+          <p>ここは選ばれし者たちが集う地です。</p>
+          <p>私たちは日々のストレスから離れ<br>真理の言葉を分かち合うことを目的としています。</p>
+        
+          <div class="rules-box">
+            <h3>三つの心得</h3>
+            <ul>
+              <li>一つ、何事にも全力で取り組む</li>
+              <li>一つ、みんなで一つになるため、のぶ子を思う</li>
+              <li>一つ、内なる声に耳を傾けること</li>
+            </ul>
+          </div>  
+
+          <p>初めて訪れた方は、まずは「歴史」を紐解き、<br>私たちの歩みを知ることから始めてください。</p>
+        </div>
+      </div>
+    </main>
   </div>
 
   <div id="history" class="page-section">
@@ -102,18 +176,18 @@
   <div id="discussion" class="page-section">
     <div class="hero-area" style="background-color: #d6d9d1;"><h1>[ 集会の写真 ]</h1></div>
     <main class="content-area">
-<!-- 話し合いエリア -->
-<div id="chat-wrapper">
-  <div id="messages-list"></div>
+    <!-- 話し合いエリア -->
+    <div id="chat-wrapper">
+      <div id="messages-list"></div>
 
-  <!-- 入力エリア -->
-  <div class="chat-controls">
-    <div class="input-row">
-      <input type="text" id="user-name" placeholder="名">
-      <input type="text" id="message-input" placeholder="言葉を刻む...">
-      <button id="send-btn">送信</button>
-    </div>
-  </div>
+      <!-- 入力エリア -->
+      <div class="chat-controls">
+        <div class="input-row">
+          <input type="text" id="user-name" placeholder="名">
+          <input type="text" id="message-input" placeholder="言葉を刻む...">
+          <button id="send-btn">送信</button>
+        </div>
+      </div>
 
   <!-- 浄化ボタン -->
   <div class="admin-area">
