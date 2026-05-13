@@ -128,7 +128,7 @@
   .history-container { width: 90%; max-width: 800px; margin: 0 auto; }
   
   /* タイムラインのレイアウト */
-  .timeline { border-left: 2px solid #333; padding: 20px 0; margin-top: 50px; text-align: left; }
+  .timeline::not(.next) { border-left: 2px solid #333; padding: 20px 0; margin-top: 50px; text-align: left; }
   
   .time-item { position: relative; margin-bottom: 50px; padding-left: 40px; }
   .time-item::before {
