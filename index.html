@@ -81,34 +81,48 @@
     letter-spacing: 2px;
   }
 
-  /* 心得などの囲み枠 */
   .rules-box {
     margin: 60px auto;
-    padding: 40px;
-    border: 1px solid #333;
-    background-color: #fff;
+    padding: 60px 40px;
+    border: 2px solid #333;
+    background-color: #fdfdfb;
+    text-align: left;
   }
 
   .rules-box h3 {
-    font-size: 24px;
-    margin-bottom: 30px;
-    text-decoration: underline;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    display: block;
   }
 
   .rules-box ul {
     list-style: none;
     padding: 0;
-    text-align: left;
-    display: inline-block;
   }
 
   .rules-box li {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
+    border-left: 3px solid #333;
+    padding-left: 25px;
   }
-  
-  .rules-box li::before {
-    content: "・";
-    margin-right: 10px;
+
+  .rules-box li strong {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #111;
+    letter-spacing: 4px;
+  }
+
+  .rules-box li p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+    margin: 0;
   }
     
   </style>
