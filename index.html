@@ -516,6 +516,83 @@
       visibility: hidden;
       transition: all 1.5s ease;
     }
+
+    /* ============================================================
+   9. 経済ページ専用スタイル (#economy)
+============================================================ */
+.economy-container {
+  width: 90%;
+  max-width: 850px;
+}
+
+/* ショップカードのデザイン */
+.shop-section {
+  margin-bottom: 80px;
+}
+
+.shop-section h3, .currency-section h3 {
+  font-size: 28px;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.shop-card {
+  background-color: #fff;
+  border: 1px solid #333;
+  padding: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.shop-card h4 {
+  font-size: 24px;
+  margin: 0 0 15px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.shop-desc {
+  font-size: 20px;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* 通貨ルールのデザイン */
+.currency-info {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.currency-info strong {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+  color: #800;
+}
+
+.how-to-get h4, .tax-info h4 {
+  font-size: 22px;
+  border-left: 5px solid #333;
+  padding-left: 15px;
+  margin: 40px 0 20px 0;
+}
+
+.how-to-get p, .tax-info p {
+  font-size: 22px;
+  line-height: 2;
+  color: #333;
+}
+
+/* 税金情報の警告感 */
+.tax-info {
+  margin-top: 60px;
+  padding: 20px;
+  background-color: #fff0f0;
+  border: 1px dashed #800;
+}
   </style>
 </head>
 <body>
@@ -540,6 +617,7 @@
       <a href="#covenant" class="menu-btn">聖約</a>
       <a href="#history" class="menu-btn">歴史</a>
       <a href="#nobuko" class="menu-btn">のぶ子信者</a>
+      <a href="#economy" class="menu-btn">経済</a>
       <a href="#discussion" class="menu-btn">話し合い</a>
     </nav>
   </header>
@@ -693,6 +771,57 @@
 
       <div class="join-guide">
         <p>あなたの中に眠る「ふざけの芽」を、今こそ開花させるときです。</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+  <!-- 経済・お店 -->
+<div id="economy" class="page-section">
+  <div class="hero-area" style="background-color: #e0d5c5;">
+    <h1>[ 聖なる富の循環 ]</h1>
+  </div>
+  
+  <main class="content-area">
+    <div class="economy-container">
+      <h2>教団経済と聖具店</h2>
+
+      <!-- 通貨と税金のセクション -->
+      <div class="currency-section">
+        <h3>聖通貨「のぶ子ドル」</h3>
+        
+        <div class="rules-box">
+          <div class="currency-info">
+            <strong>単位：ND（のぶ子ドル）</strong>
+            <p>当教団内でのみ価値を持つ、絶対的な信頼に基づく通貨です。</p>
+          </div>
+
+          <div class="how-to-get">
+            <h4>獲得の方法</h4>
+            <p>のぶ子ドルは金銭で買うことはできません。教団への多大なる「貢献」によってのみ、その魂に付与されます。SNSでの拡散、新たな信者の勧誘、そして本気のふざけの実践などが評価の対象となります。</p>
+          </div>
+
+          <div class="tax-info">
+            <h4>聖税の徴収について（予告）</h4>
+            <p>近き未来、我々は「聖税」の徴収を開始する予定です。集められた税は、さらなる世界平和（巨大なふざけ）のために正しく運用されます。信者はその日に備え、徳とのぶ子ドルを蓄えておくように。</p>
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- ショップセクション -->
+      <div class="shop-section">
+        <h3>公認聖具店（SHOP）</h3>
+        
+        <div class="shop-card">
+          <h4>ナミキSHOP</h4>
+          <p class="shop-desc">創造主の息吹を感じる「シール」から、世の常識を覆す「偽お菓子」まで。あなたの日常を本気のふざけで彩る一品を販売しています。</p>
+        </div>
+
+        <div class="shop-card">
+          <h4>...shop</h4>
+          <p class="shop-desc">.....のように書く</p>
+        </div>
       </div>
     </div>
   </main>
