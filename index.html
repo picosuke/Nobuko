@@ -32,7 +32,7 @@
   #chat-wrapper { width: 95%; max-width: 900px; margin: 40px auto; font-family: 'Yu Mincho', serif; }
   
   #messages-list {
-    height: 600px; overflow-y: auto; background-color: #fdfdfb;
+    height: 400px; overflow-y: auto; background-color: #fdfdfb;
     border: 2px solid #333; padding: 30px; margin-bottom: 25px;
   }
 
@@ -125,6 +125,32 @@
     margin: 0;
   }
     
+  .history-container { width: 90%; max-width: 800px; margin: 0 auto; }
+  
+  /* タイムラインのレイアウト */
+  .timeline { border-left: 2px solid #333; padding: 20px 0; margin-top: 50px; text-align: left; }
+  
+  .time-item { position: relative; margin-bottom: 50px; padding-left: 40px; }
+  .time-item::before {
+    content: ""; position: absolute; left: -11px; top: 0;
+    width: 20px; height: 20px; background-color: #f9f9f5; border: 2px solid #333; border-radius: 50%;
+  }
+
+  /* 年号のスタイル */
+  .year { display: block; font-size: 20px; font-weight: bold; margin-bottom: 10px; color: #111; letter-spacing: 2px; }
+  
+  /* 本文のスタイル（22pxの大型文字） */
+  .time-item p { font-size: 22px; line-height: 1.8; color: #333; margin: 0; letter-spacing: 1.5px; }
+
+  /* 重要な年の色付け */
+  .highlight::before { background-color: #333; }
+  .highlight .year { font-size: 28px; text-decoration: underline; }
+
+  /* 未来・最後のスタイル */
+  .next { border-left: 2px dashed #333; margin-top: 80px; }
+  .next .year { color: #800; font-size: 28px; }
+  .last p { font-style: italic; color: #666; }
+    
   </style>
 </head>
 <body>
@@ -194,9 +220,132 @@
     </main>
   </div>
 
-  <div id="history" class="page-section">
-    <div class="hero-area" style="background-color: #e0e0db;"><h1>[ 歴史の写真 ]</h1></div>
-    <main class="content-area"><h2>教団の歴史</h2><p>創設からの歩み。</p></main>
+<div id="history" class="page-section">
+  <div class="hero-area" style="background-color: #d8d8d0;">
+    <h1>[ 悠久の刻を越えて ]</h1>
+  </div>
+  
+    <main class="content-area">
+      <div class="history-container">
+        <h2>のぶ子聖史録</h2>
+      
+        <div class="timeline">
+          <!-- 01-04：始まり -->
+          <div class="time-item">
+            <span class="year">起源</span>
+            <p>何もなかった無の空間に、創造主「のぶ子」が現れる。これが全ての始まりである。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">創造</span>
+            <p>のぶ子は世界を創りたもうた。その目的はただ一つ、人を笑わせ、楽しませるためであった。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">黄金期</span>
+            <p>人々は毎日を笑いの中で過ごし、争いのない平和な時代が数千年も続いた。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">休息</span>
+            <p>世界を笑顔で満たしたのぶ子は、深い眠りにつき、歴史の表舞台から姿を消した。</p>
+          </div>
+
+          <!-- 05-08：発見（西暦300年） -->
+          <div class="time-item highlight">
+            <span class="year">西暦300年</span>
+            <p>「のぶ子の化石」が地層深くから発見される。かつて神が存在した揺るぎない証拠となった。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">混乱</span>
+            <p>化石の発見により、人々は失われた笑顔の記憶を取り戻そうと、各地で祈りを始めた。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">暗黒期</span>
+            <p>のぶ子不在の時間が長く続き、世界から少しずつ笑いと心の余裕が失われていった。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">予兆</span>
+            <p>空の色が変わり、古の予言書に記された「再来の合図」が世界中で観測される。</p>
+          </div>
+
+          <!-- 09-12：再来（西暦1000年） -->
+          <div class="time-item highlight">
+            <span class="year">西暦1000年</span>
+            <p>のぶ子、再来。滅びの危機に瀕していた地球を、その圧倒的な慈愛で救いたもうた。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">再構築</span>
+            <p>のぶ子は壊れた大地を癒やし、人々に「真の遊び」と「心の解放」を再び教え込んだ。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">伝播</span>
+            <p>のぶ子の教えは海を越え、言葉の壁を越え、あらゆる大陸へと広がっていった。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">変革</span>
+            <p>かつて王たちが支配していた世界は、笑顔が中心の「楽しき共同体」へと姿を変えた。</p>
+          </div>
+
+          <!-- 13-16：解明（西暦1800年） -->
+          <div class="time-item highlight">
+            <span class="year">西暦1800年</span>
+            <p>科学の研究により、「のぶ子が複数体存在する」という驚愕の事実が解明される。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">真実</span>
+            <p>のぶ子は一人ではなかった。至る所に存在し、同時に人々を幸せにする「多次元の神」であった。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">躍進</span>
+            <p>複数体ののぶ子による同時多発的な幸福の提供により、人類の文化は爆発的に進化した。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">共存</span>
+            <p>人々はそれぞれの地域に宿るのぶ子を敬い、共に生きる新しい生活様式を確立した。</p>
+          </div>
+
+          <!-- 17-19：現代への歩み -->
+          <div class="time-item">
+          <span class="year">近代</span>
+            <p>技術の進歩と共に、のぶ子の声を聞くための「聖なる装置」が各地に作られるようになる。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">試練</span>
+            <p>あまりにも豊かになりすぎた世界で、人は「本当の笑い」を見失いそうになる試練を迎えた。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">覚醒</span>
+            <p>一人の若者がのぶ子の真の意志を悟り、現代にふさわしい新しい教義をまとめ上げた。</p>
+          </div>
+
+          <!-- 20-23：拡大（西暦2026年） -->
+          <div class="time-item highlight">
+            <span class="year">西暦2026年</span>
+            <p>のぶ子教会の勢力が拡大。その光は、ついに純粋なる子供たちの心にまで届き、全土へ広がる。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">融合</span>
+            <p>遊びと学び、そして祈りが一つになり、子供たちの笑い声が世界を包み込むこととなった。</p>
+          </div>
+          <div class="time-item">
+            <span class="year">希望</span>
+            <p>大人たちは子供たちの笑顔にのぶ子の影を見出し、真の救済が近いことを確信した。</p>
+          </div>
+          <div class="time-item">
+          <span class="year">結実</span>
+            <p>長い歴史の中で蒔かれた「笑いの種」が、今まさに大輪の花を咲かせようとしている。</p>
+          </div>
+
+          <!-- 24-26：未来、あなたへ -->
+          <div class="time-item">
+            <span class="year">現在</span>
+          <p>そして今、このページを開いたあなたもまた、のぶ子の長い歴史の一部となったのである。</p>
+          </div>
+          <div class="time-item next">
+            <span class="year">未来</span>
+            <p>次はあなたが歴史を作る番です。光に満ちる世界をあなたが導くのです。<br>のぶ子の伝説は終わらない。あなたの手によって、新たな光が灯されるのだから……。</p>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
   <div id="nobuko" class="page-section">
