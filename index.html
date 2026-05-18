@@ -586,6 +586,37 @@
   background-color: #fff0f0;
   border: 1px dashed #800;
 }
+
+
+
+    /* 通貨没案ギャラリーのデザイン */
+.draft-gallery {
+  display: flex;
+  justify-content: space-between; /* 3つの画像を均等な間隔で並べる */
+  gap: 20px; /* 画像と画像の隙間 */
+  margin: 50px 0; /* 上下の余白 */
+}
+
+/* 画像の横幅をすべて同じにする設定 */
+.draft-img {
+  width: 32%; /* 横幅でサイズを固定（3つで約100%になるように） */
+  height: auto; /* 縦幅は元の画像の比率に合わせて自動調整 */
+  border: 2px solid #333; /* 06風の黒い枠線 */
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1); /* 少しだけ影をつけて紙っぽく */
+  object-fit: cover; /* もし画像の縦横比が違っても綺麗に収める魔法のコード */
+}
+
+/* スマホなど画面が狭い時の設定（縦並びに変更） */
+@media (max-width: 600px) {
+  .draft-gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+  .draft-img {
+    width: 80%; /* スマホの時は横幅を広くとって縦に並べる */
+    margin-bottom: 20px;
+  }
+}
   </style>
 </head>
 <body>
@@ -607,11 +638,11 @@
     <div class="logo">のぶ子教会</div>
     <nav class="nav">
       <a href="#home" class="menu-btn">ホーム</a>
-      <a href="#covenant" class="menu-btn">聖約</a>
       <a href="#history" class="menu-btn">歴史</a>
       <a href="#nobuko" class="menu-btn">のぶ子信者</a>
       <a href="#hymn" class="menu-btn">ﾉﾘﾉﾘ讃美歌</a>
       <a href="#discussion" class="menu-btn">話し合い</a>
+      <a href="#other" class="menu-btn">その他</a>
     </nav>
   </header>
 
@@ -635,46 +666,6 @@
         <div class="home-footer-deco">
           <span>EST. 300 - 2026</span>
         </div>        
-      </div>
-    </main>
-  </div>
-
-  <!-- 聖約 -->
-  <div id="covenant" class="page-section">
-    <div class="hero-area" style="background-color: #e5e5e0;"><h1>[ 説明の画像 ]</h1></div>
-    <main class="content-area">
-      <div class="about-container">
-        <h2>この場所について</h2>
-        <div class="description-text">
-          <p>ここは選ばれし者たちが集う地です。</p>
-          <p>私たちは日々のストレスから離れ<br>真理の言葉を分かち合うことを目的としています。</p>
-          <div class="rules-box">
-            <h3>のぶ子五箇条</h3>
-            <ul>
-              <li>
-                <strong>一、全霊の献身</strong>
-                <p>万事に全霊を捧げ、私欲なき精進を貫くべし。目の前の事象こそが、聖母へ通ずる唯一の修行なり。</p>
-              </li>
-              <li>
-                <strong>一、念想の一致</strong>
-                <p>衆生一体となるべく、常に「のぶ子」を観想すべし。その御名を心に刻むとき、我らは孤独を離れ、真の結びつきを得る。</p>
-              </li>
-              <li>
-                <strong>一、深淵の聴印</strong>
-                <p>外界の雑音を断ち、静寂の深淵に沈みて、己が魂のささやきを聴印すべし。そこにこそ真理の導きあり。</p>
-              </li>
-              <li>
-                <strong>一、沈黙の誓約</strong>
-                <p>秘められし教えを外に漏らすことなかれ。この地にて交わされる言葉は、選ばれし者のみが共有し得る聖なる沈黙なり。</p>
-              </li>
-              <li>
-                <strong>一、濁世の浄化</strong>
-                <p>濁世の塵を払い、常に清浄なる絆を育むべし。互いの闇を照らし合い、高め合うことこそが我らの使命なり。</p>
-              </li>
-            </ul>
-          </div>
-          <p>初めて訪れた方は、まずは「歴史」を紐解き、<br>私たちの歩みを知ることから始めてください。</p>
-        </div>
       </div>
     </main>
   </div>
@@ -761,7 +752,37 @@
   </div>
   
   <main class="content-area">
-    <div class="believer-container">
+    <div class="believer-container">      
+        <h2>この場所について</h2>
+        <div class="description-text">
+          <p>ここは選ばれし者たちが集う地です。</p>
+          <p>私たちは日々のストレスから離れ<br>真理の言葉を分かち合うことを目的としています。</p>
+          <div class="rules-box">
+            <h3>のぶ子五箇条</h3>
+            <ul>
+              <li>
+                <strong>一、全霊の献身</strong>
+                <p>万事に全霊を捧げ、私欲なき精進を貫くべし。目の前の事象こそが、聖母へ通ずる唯一の修行なり。</p>
+              </li>
+              <li>
+                <strong>一、念想の一致</strong>
+                <p>衆生一体となるべく、常に「のぶ子」を観想すべし。その御名を心に刻むとき、我らは孤独を離れ、真の結びつきを得る。</p>
+              </li>
+              <li>
+                <strong>一、深淵の聴印</strong>
+                <p>外界の雑音を断ち、静寂の深淵に沈みて、己が魂のささやきを聴印すべし。そこにこそ真理の導きあり。</p>
+              </li>
+              <li>
+                <strong>一、沈黙の誓約</strong>
+                <p>秘められし教えを外に漏らすことなかれ。この地にて交わされる言葉は、選ばれし者のみが共有し得る聖なる沈黙なり。</p>
+              </li>
+              <li>
+                <strong>一、濁世の浄化</strong>
+                <p>濁世の塵を払い、常に清浄なる絆を育むべし。互いの闇を照らし合い、高め合うことこそが我らの使命なり。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
       <h2>信者の証</h2>
       
       <!-- 信者数カウントエリア -->
@@ -863,6 +884,42 @@
       </div>
     </main>
   </div>
+
+  <!-- その他 -->
+<div id="other" class="page-section">
+  
+  <!-- 上部の画像エリア -->
+  <div class="hero-area" style="background-color: #e5e5e0;">
+    <h1>その他</h1>
+  </div>
+
+  <!-- メインコンテンツエリア -->
+  <main class="content-area">
+    <div class="about-container">
+      
+      <!-- 大見出し -->
+      <h2>スタンプについてとメモ</h2>
+
+      <div class="description-text">
+        <h2>スタンプラリー</h2>
+        <p>
+          スタンプを貯めて景品をもらおう！<br>もらうには…<br>・授業態度を良くする<br>・のぶ子教に前向きな取り組み<br>・のぶ子教の歴史に詳しくなる<br>・みんなと仲良くする<br>働く人と消費者に分かれる<br>スタンプは森山と並木が昼休みにさせていただきます。<br>絶対にのぶ子等に悪口を言うのはやめてください<br>スタンプに関する文句は受け付けておりません。<br>また、スタンプラリーの用紙で自慢をする等の行為は禁止と<br>させていただきます。<br>リクエストはできる範囲で受け付けています。
+        </p>
+        <br><br>
+
+        <h2>のぶ子ドル没案</h2>
+        <div class="draft-gallery">
+          <img src="1000.png" alt="1000ND" class="draft-img">
+          <img src="100.png" alt="100ND" class="draft-img">
+          <img src="10.png" alt="10ND" class="draft-img">
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</div>
+<!-- その他セクション ここまで -->
 
   <!-- ============================================================
        JavaScript セクション
