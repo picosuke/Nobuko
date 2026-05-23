@@ -575,7 +575,7 @@ body {
 
 .draft-img {
   width: auto;
-  height: 100px;
+  height: 200px;
   border: 2px solid #333;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
