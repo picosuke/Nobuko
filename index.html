@@ -4,620 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>のぶ子教会ホームページ</title>
-  <style>
-    /* ============================================================
-       1. 基本設定 & 共通パーツ (06風デザイン)
-    ============================================================ */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Yu Mincho', 'Sawarabi Mincho', serif;
-      background-color: #f9f9f5;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    /* 最上部のストライプ装飾 */
-    .top-stripe {
-      height: 12px;
-      background: repeating-linear-gradient(to right, #e0e0db, #e0e0db 4px, #f9f9f5 4px, #f9f9f5 8px);
-    }
-
-    /* 固定ヘッダー */
-    .header-06 {
-      height: 90px;
-      background-color: #f9f9f5;
-      padding: 0 10%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .header-06 .logo {
-      font-size: 28px;
-      letter-spacing: 4px;
-    }
-
-    /* ナビゲーションメニュー */
-    .header-06 .nav {
-      display: flex;
-      gap: 60px;
-    }
-
-    .header-06 .nav a {
-      color: #333;
-      text-decoration: none;
-      font-size: 18px;
-      letter-spacing: 3px;
-      transition: all 0.3s;
-      padding-bottom: 5px;
-      border-bottom: 1px solid transparent;
-    }
-
-    /* ホバー時とアクティブ状態の下線 */
-    .header-06 .nav a:hover,
-    .header-06 .nav a.active {
-      color: #888;
-      border-bottom: 1px solid #888;
-    }
-
-    /* ============================================================
-       2. 各ページの共通レイアウト
-    ============================================================ */
-    .page-section {
-      display: none; /* 初期状態は非表示 */
-      animation: fadeIn 0.8s ease-in-out;
-    }
-
-    .page-section.active {
-      display: block; /* activeクラスが付くと表示 */
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 各ページのトップ画像エリア */
-    .hero-area {
-      height: 400px;
-      background-color: #ebebe6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .hero-area h1 {
-      margin: 0;
-      color: #999;
-      font-size: 24px;
-      letter-spacing: 6px;
-    }
-
-    /* メインコンテンツエリア */
-    .content-area {
-      min-height: 500px;
-      padding: 80px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .content-area h2 {
-      font-size: 28px;
-      letter-spacing: 4px;
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
-      margin-bottom: 40px;
-    }
-
-    /* ============================================================
-       3. ホーム画面専用スタイル (#home)
-    ============================================================ */
-    .manifesto-inner {
-      width: 90%;
-      max-width: 850px;
-      text-align: center;
-    }
-
-    .catchphrase {
-      font-size: 32px;
-      line-height: 1.8;
-      margin-bottom: 80px;
-      letter-spacing: 4px;
-      font-weight: bold;
-    }
-
-    .catchphrase span {
-      border-bottom: 2px solid #333;
-      padding-bottom: 5px;
-    }
-
-    .manifesto-body p {
-      font-size: 22px;
-      line-height: 2.2;
-      margin-bottom: 40px;
-      letter-spacing: 2px;
-    }
-
-    .home-footer-deco {
-      margin-top: 60px;
-      border-top: 1px solid #ccc;
-      padding-top: 20px;
-      display: inline-block;
-      letter-spacing: 6px;
-      color: #999;
-    }
-
-    /* ============================================================
-       4. 聖約ページ専用スタイル (#covenant)
-    ============================================================ */
-    .about-container {
-      width: 90%;
-      max-width: 800px;
-      text-align: center;
-    }
-
-    .description-text {
-      font-size: 22px;
-      line-height: 2.2;
-      letter-spacing: 2px;
-    }
-
-    .rules-box {
-      margin: 60px auto;
-      padding: 60px 40px;
-      border: 2px solid #333;
-      background-color: #fdfdfb;
-      text-align: left;
-    }
-
-    .rules-box h3 {
-      font-size: 32px;
-      text-align: center;
-      margin-bottom: 50px;
-      letter-spacing: 10px;
-      border-bottom: 1px solid #333;
-      padding-bottom: 15px;
-    }
-
-    .rules-box ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .rules-box li {
-      margin-bottom: 40px;
-      border-left: 3px solid #333;
-      padding-left: 25px;
-    }
-
-    .rules-box li strong {
-      display: block;
-      font-size: 24px;
-      margin-bottom: 10px;
-      letter-spacing: 4px;
-    }
-
-    .rules-box li p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #444;
-      margin: 0;
-    }
-
-    /* ============================================================
-       5. 歴史ページ専用スタイル (#history)
-    ============================================================ */
-    .history-container {
-      width: 90%;
-      max-width: 800px;
-    }
-
-    .timeline {
-      padding: 20px 0;
-      margin-top: 50px;
-      text-align: left;
-      border-left: 2px solid #333;
-    }
-
-    .time-item {
-      position: relative;
-      margin-bottom: 50px;
-      padding-left: 40px;
-    }
-
-    .time-item::before {
-      content: "";
-      position: absolute;
-      left: -11px;
-      top: 0;
-      width: 20px;
-      height: 20px;
-      background-color: #f9f9f5;
-      border: 2px solid #333;
-      border-radius: 50%;
-    }
-
-    .year {
-      display: block;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-    }
-
-    .time-item p {
-      font-size: 22px;
-      line-height: 1.8;
-      letter-spacing: 1.5px;
-    }
-
-    .highlight::before {
-      background-color: #333;
-    }
-
-    .highlight .year {
-      font-size: 28px;
-      text-decoration: underline;
-    }
-
-    .next .year {
-      color: #800;
-      font-size: 28px;
-    }
-
-    /* ============================================================
-       6. 話し合い（チャット）専用スタイル (#discussion)
-    ============================================================ */
-    #chat-wrapper {
-      width: 95%;
-      max-width: 900px;
-      margin: 40px auto;
-    }
-
-    #messages-list {
-      height: 400px;
-      overflow-y: auto;
-      background-color: #fdfdfb;
-      border: 2px solid #333;
-      padding: 30px;
-      margin-bottom: 25px;
-    }
-
-    .message-item {
-      border-bottom: 1px solid #ddd;
-      padding: 30px 0;
-      text-align: left;
-    }
-
-    .msg-header {
-      font-size: 16px;
-      color: #666;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      letter-spacing: 2px;
-    }
-
-    .msg-content {
-      font-size: 22px;
-      color: #111;
-      line-height: 1.8;
-      letter-spacing: 2px;
-      font-weight: 500;
-    }
-
-    .chat-controls {
-      background: #f9f9f5;
-      padding: 30px;
-      border: 2px solid #333;
-    }
-
-    .input-row {
-      display: flex;
-      gap: 15px;
-    }
-
-    #user-name { width: 140px; padding: 15px; border: 1px solid #333; font-family: inherit; font-size: 18px; }
-    #message-input { flex-grow: 1; padding: 15px; border: 1px solid #333; font-family: inherit; font-size: 18px; }
-
-    #send-btn {
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 0 40px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 18px;
-      letter-spacing: 4px;
-      transition: background 0.3s;
-    }
-
-    #send-btn:hover { background: #555; }
-
-    .admin-area {
-      text-align: right;
-      margin-top: 20px;
-    }
-
-    #delete-all-btn {
-      color: #ccc;
-      font-size: 14px;
-      cursor: pointer;
-      border: none;
-      background: none;
-      text-decoration: underline;
-    }
-
-    /* ============================================================
-   7. 信者ページ専用スタイル (#nobuko)
-============================================================ */
-.believer-container {
-  width: 90%;
-  max-width: 850px;
-  text-align: center;
-}
-
-/* 人数表示 */
-.believer-count-box {
-  margin-bottom: 60px;
-  padding: 40px;
-  background-color: #f0f0eb;
-  border: 1px solid #333;
-}
-
-.count-label {
-  font-size: 18px;
-  letter-spacing: 4px;
-  margin-bottom: 15px;
-}
-
-.count-number {
-  font-size: 56px; /* 巨大な数字 */
-  font-weight: bold;
-  letter-spacing: 10px;
-  color: #111;
-}
-
-.count-number span {
-  font-size: 24px;
-  letter-spacing: 2px;
-}
-
-.count-sub {
-  font-size: 14px;
-  color: #888;
-  margin-top: 10px;
-}
-
-/* 信者の声 */
-.voice-section {
-  margin-top: 80px;
-  text-align: left;
-}
-
-.voice-section h3 {
-  font-size: 28px;
-  text-align: center;
-  margin-bottom: 50px;
-  letter-spacing: 4px;
-}
-
-.voice-item {
-  margin-bottom: 50px;
-  padding: 30px;
-  border-bottom: 1px dotted #ccc;
-  position: relative;
-}
-
-.voice-item::before {
-  content: "“";
-  position: absolute;
-  left: 0;
-  top: 10px;
-  font-size: 60px;
-  color: #eee;
-  font-family: serif;
-}
-
-.voice-text {
-  font-size: 22px;
-  line-height: 1.8;
-  color: #333;
-  margin-bottom: 15px;
-  font-style: italic;
-}
-
-.voice-name {
-  text-align: right;
-  font-size: 16px;
-  color: #666;
-  letter-spacing: 2px;
-}
-
-.join-guide {
-  margin-top: 60px;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: #800; /* 少し目を引く色 */
-}
-
-    /* ============================================================
-       8. パスワード画面スタイル
-    ============================================================ */
-    #password-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #f9f9f5;
-      z-index: 10000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .password-content {
-      text-align: center;
-      animation: fadeIn 2s ease;
-    }
-
-    .pw-label {
-      font-size: 24px;
-      letter-spacing: 5px;
-      margin-bottom: 30px;
-    }
-
-    #pw-input {
-      display: block;
-      margin: 0 auto 20px;
-      padding: 15px;
-      width: 250px;
-      border: 1px solid #333;
-      background: none;
-      font-size: 20px;
-      text-align: center;
-      outline: none;
-    }
-
-    #pw-btn {
-      padding: 10px 40px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 16px;
-      letter-spacing: 3px;
-    }
-
-    #pw-error {
-      margin-top: 20px;
-      color: #800;
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
-
-    .fade-out {
-      opacity: 0;
-      visibility: hidden;
-      transition: all 1.5s ease;
-    }
-
-    /* ============================================================
-   9. 経済ページ専用スタイル (#economy)
-============================================================ */
-.economy-container {
-  width: 90%;
-  max-width: 850px;
-}
-
-/* ショップカードのデザイン */
-.shop-section {
-  margin-bottom: 80px;
-}
-
-.shop-section h3, .currency-section h3 {
-  font-size: 28px;
-  letter-spacing: 4px;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.shop-card {
-  background-color: #fff;
-  border: 1px solid #333;
-  padding: 30px;
-  margin-bottom: 30px;
-  text-align: left;
-}
-
-.shop-card h4 {
-  font-size: 24px;
-  margin: 0 0 15px 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-.shop-desc {
-  font-size: 20px;
-  line-height: 1.8;
-  color: #444;
-}
-
-/* 通貨ルールのデザイン */
-.currency-info {
-  text-align: center;
-  margin-bottom: 40px;
-  padding-bottom: 30px;
-  border-bottom: 1px dotted #ccc;
-}
-
-.currency-info strong {
-  font-size: 32px;
-  display: block;
-  margin-bottom: 10px;
-  color: #800;
-}
-
-.how-to-get h4, .tax-info h4 {
-  font-size: 22px;
-  border-left: 5px solid #333;
-  padding-left: 15px;
-  margin: 40px 0 20px 0;
-}
-
-.how-to-get p, .tax-info p {
-  font-size: 22px;
-  line-height: 2;
-  color: #333;
-}
-
-/* 税金情報の警告感 */
-.tax-info {
-  margin-top: 60px;
-  padding: 20px;
-  background-color: #fff0f0;
-  border: 1px dashed #800;
-}
-
-
-
-    /* 通貨没案ギャラリーのデザイン */
-.draft-gallery {
-  display: flex;
-  justify-content: space-between; /* 3つの画像を均等な間隔で並べる */
-  gap: 20px; /* 画像と画像の隙間 */
-  margin: 50px 0; /* 上下の余白 */
-}
-
-/* 画像の横幅をすべて同じにする設定 */
-.draft-img {
-  width: 32%; /* 横幅でサイズを固定（3つで約100%になるように） */
-  height: auto; /* 縦幅は元の画像の比率に合わせて自動調整 */
-  border: 2px solid #333; /* 06風の黒い枠線 */
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1); /* 少しだけ影をつけて紙っぽく */
-  object-fit: cover; /* もし画像の縦横比が違っても綺麗に収める魔法のコード */
-}
-
-/* スマホなど画面が狭い時の設定（縦並びに変更） */
-@media (max-width: 600px) {
-  .draft-gallery {
-    flex-direction: column;
-    align-items: center;
-  }
-  .draft-img {
-    width: 80%; /* スマホの時は横幅を広くとって縦に並べる */
-    margin-bottom: 20px;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -650,7 +37,9 @@
 
   <!-- ホーム -->
   <div id="home" class="page-section">
-    <div class="hero-area"><h1>[ ホームの写真 ]</h1></div>
+    <div class="hero-area">
+      <h1>[ ホームの写真 ]</h1>
+    </div>
     <main class="content-area home-manifesto">
       <div class="manifesto-inner">
         <p class="catchphrase">
@@ -672,12 +61,14 @@
 
   <!-- 歴史 -->
   <div id="history" class="page-section">
-    <div class="hero-area" style="background-color: #d8d8d0;"><h1>[ 悠久の刻を越えて ]</h1></div>
+    <div class="hero-area" style="background-color: #d8d8d0;">
+      <h1>[ 悠久の刻を越えて ]</h1>
+    </div>
     <main class="content-area">
       <div class="history-container">
         <h2>のぶ子聖史録</h2>
         <div class="timeline">
-<div class="time-item"><span class="year">起源</span><p>何もなかった無の空間に、創造主「のぶ子」が現れる。<br>これが全ての始まりである。</p></div>
+          <div class="time-item"><span class="year">起源</span><p>何もなかった無の空間に、創造主「のぶ子」が現れる。<br>これが全ての始まりである。</p></div>
           <div class="time-item"><span class="year">黎明</span><p>のぶ子が最初の息を吐いたとき、光と共に「ユーモア」という<br>概念が世界に初めて誕生した。</p></div>
           <div class="time-item"><span class="year">創造</span><p>のぶ子は世界を創りたもうた。その目的はただ一つ、<br>人を笑わせ、楽しませるためであった。</p></div>
           <div class="time-item"><span class="year">微視的干渉</span><p>のぶ子の力は星々の配置を決めるだけでなく、一匹の羽虫が<br>滑稽に飛ぶ軌道にまで及んだ。ミクロの笑いが世界を構成した。</p></div>
@@ -745,14 +136,14 @@
     </main>
   </div>
 
-<!-- のぶ子信者 -->
-<div id="nobuko" class="page-section">
-  <div class="hero-area" style="background-color: #d1cbcb;">
-    <h1>[ 結ばれし魂の群像 ]</h1>
-  </div>
-  
-  <main class="content-area">
-    <div class="believer-container">      
+  <!-- のぶ子信者 -->
+  <div id="nobuko" class="page-section">
+    <div class="hero-area" style="background-color: #d1cbcb;">
+      <h1>[ 結ばれし魂の群像 ]</h1>
+    </div>
+    
+    <main class="content-area">
+      <div class="believer-container">      
         <h2>この場所について</h2>
         <div class="description-text">
           <p>ここは選ばれし者たちが集う地です。</p>
@@ -783,91 +174,92 @@
             </ul>
           </div>
         </div>
-      <h2>信者の証</h2>
-      
-      <!-- 信者数カウントエリア -->
-      <div class="believer-count-box">
-        <p class="count-label">クラスに顕現せし魂の数</p>
-        <div class="count-number">十二<span> 名</span></div>
-        <p class="count-label">現世に顕現せし魂の数</p>
-        <div class="count-number">一八、八九四<span> 名</span></div>
-        <p class="count-sub">※刻一刻と増殖中</p>
-      </div>
-
-      <div class="description-text">
-        <p>のぶ子信者とは、単なるファンではありません。<br>創造主のぶ子の「笑い」という光を浴び、<br>真の幸福を掴み取った選ばれし者たちの称号です。</p>
-      </div>
-
-      <!-- 信者の声（なってよかったこと） -->
-      <div class="voice-section">
-        <h3>覚醒せし者たちの独白</h3>
         
-        <div class="voice-item">
-          <p class="voice-text">「以前の私は、ただ呼吸をするだけの機械でした。しかし、のぶ子様に出会い『本気のふざけ』を知ってから、道端の石ころを見るだけで三時間は笑えるようになりました。人生が輝いています。」</p>
-          <p class="voice-name">（三十代・元公務員）</p>
+        <h2>信者の証</h2>
+        
+        <!-- 信者数カウントエリア -->
+        <div class="believer-count-box">
+          <p class="count-label">クラスに顕現せし魂の数</p>
+          <div class="count-number">十二<span> 名</span></div>
+          <p class="count-label">現世に顕現せし魂の数</p>
+          <div class="count-number">一八、八九四<span> 名</span></div>
+          <p class="count-sub">※刻一刻と増殖中</p>
         </div>
 
-        <div class="voice-item">
-          <p class="voice-text">「のぶ子信者になって一番良かったのは、孤独が消えたことです。目を閉じれば、世界中に散らばる複数ののぶ子様、そして同志たちの笑い声が聞こえてくる。もう、何も怖くありません。」</p>
-          <p class="voice-name">（二十代・学生）</p>
+        <div class="description-text">
+          <p>のぶ子信者とは、単なるファンではありません。<br>創造主のぶ子の「笑い」という光を浴び、<br>真の幸福を掴み取った選ばれし者たちの称号です。</p>
         </div>
 
-        <div class="voice-item">
-          <p class="voice-text">「全力でふざける。ただそれだけのことが、これほどまでに魂を浄化するとは思いませんでした。昨日の自分よりも、今の自分の方が圧倒的に面白い。それが最高の救済です。」</p>
-          <p class="voice-name">（四十代・実業家）</p>
+        <!-- 信者の声（なってよかったこと） -->
+        <div class="voice-section">
+          <h3>覚醒せし者たちの独白</h3>
+          
+          <div class="voice-item">
+            <p class="voice-text">「以前の私は、ただ呼吸をするだけの機械でした。しかし、のぶ子様に出会い『本気のふざけ』を知ってから、道端の石ころを見るだけで三時間は笑えるようになりました。人生が輝いています。」</p>
+            <p class="voice-name">（三十代・元公務員）</p>
+          </div>
+
+          <div class="voice-item">
+            <p class="voice-text">「のぶ子信者になって一番良かったのは、孤独が消えたことです。目を閉じれば、世界中に散らばる複数ののぶ子様、そして同志たちの笑い声が聞こえてくる。もう、何も怖くありません。」</p>
+            <p class="voice-name">（二十代・学生）</p>
+          </div>
+
+          <div class="voice-item">
+            <p class="voice-text">「全力でふざける。ただそれだけのことが、これほどまでに魂を浄化するとは思いませんでした。昨日の自分よりも、今の自分の方が圧倒的に面白い。それが最高の救済です。」</p>
+            <p class="voice-name">（四十代・実業家）</p>
+          </div>
+        </div>
+
+        <div class="join-guide">
+          <p>あなたの中に眠る「ふざけの芽」を、今こそ開花させるときです。</p>
         </div>
       </div>
-
-      <div class="join-guide">
-        <p>あなたの中に眠る「ふざけの芽」を、今こそ開花させるときです。</p>
-      </div>
-    </div>
-  </main>
-</div>
-
-  <!-- 経済・お店 -->
-<div id="hymn" class="page-section">
-  <div class="hero-area" style="background-color: #e0d5c5;">
-    <h1>[ ノリノリ讃美歌 ]</h1>
+    </main>
   </div>
-  
-  <main class="content-area">
-  
-    <h3>
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br><br>
 
-    燃えろ　燃えろ　燃えろ　のぶ子<br>
-    燃えろ　燃えろ　燃えろ　のぶ子<br><br>
+  <!-- 讃美歌 -->
+  <div id="hymn" class="page-section">
+    <div class="hero-area" style="background-color: #e0d5c5;">
+      <h1>[ ノリノリ讃美歌 ]</h1>
+    </div>
+    
+    <main class="content-area">
+      <h3>
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br><br>
 
-    we are のぶ子　we are のぶ子<br>
-    we are のぶ子　we are のぶ子<br><br>
+      燃えろ　燃えろ　燃えろ　のぶ子<br>
+      燃えろ　燃えろ　燃えろ　のぶ子<br><br>
 
-    i love のぶ子　i love のぶ子<br>
-    i love のぶ子　i love のぶ子<br><br>
-    
-    燃えろ　燃えろ　燃えろ　のぶ子<br>
-    燃えろ　燃えろ　燃えろ　のぶ子<br><br>
-    
-    we are のぶ子　we are のぶ子<br>
-    we are のぶ子　we are のぶ子<br><br>
+      we are のぶ子　we are のぶ子<br>
+      we are のぶ子　we are のぶ子<br><br>
 
-    i love のぶ子　i love のぶ子<br>
-    i love のぶ子　i love のぶ子<br><br>
-    
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
-    のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神
-    </h3>
-    
-  </main>
-</div>
+      i love のぶ子　i love のぶ子<br>
+      i love のぶ子　i love のぶ子<br><br>
+      
+      燃えろ　燃えろ　燃えろ　のぶ子<br>
+      燃えろ　燃えろ　燃えろ　のぶ子<br><br>
+      
+      we are のぶ子　we are のぶ子<br>
+      we are のぶ子　we are のぶ子<br><br>
+
+      i love のぶ子　i love のぶ子<br>
+      i love のぶ子　i love のぶ子<br><br>
+      
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神<br>
+      のぶ子がシーサー　のぶ子がシーサー　のぶ子がシーサー　守り神
+      </h3>
+    </main>
+  </div>
 
   <!-- 話し合い -->
   <div id="discussion" class="page-section">
-    <div class="hero-area" style="background-color: #d6d9d1;"><h1>[ 集会の写真 ]</h1></div>
+    <div class="hero-area" style="background-color: #d6d9d1;">
+      <h1>[ 集会の写真 ]</h1>
+    </div>
     <main class="content-area">
       <div id="chat-wrapper">
         <div id="messages-list"></div>
@@ -886,149 +278,36 @@
   </div>
 
   <!-- その他 -->
-<div id="other" class="page-section">
-  
-  <!-- 上部の画像エリア -->
-  <div class="hero-area" style="background-color: #e5e5e0;">
-    <h1>その他</h1>
+  <div id="other" class="page-section">
+    <div class="hero-area" style="background-color: #e5e5e0;">
+      <h1>その他</h1>
+    </div>
+
+    <main class="content-area">
+      <div class="about-container">
+        <h2>スタンプについてとメモ</h2>
+
+        <div class="description-text">
+          <h2>スタンプラリー</h2>
+          <p>
+            スタンプを貯めて景品をもらおう！<br>もらうには…<br>・授業態度を良くする<br>・のぶ子教に前向きな取り組み<br>・のぶ子教の歴史に詳しくなる<br>・みんなと仲良くする<br>働く人と消費者に分かれる<br>スタンプは森山と並木が昼休みにさせていただきます。<br>絶対にのぶ子等に悪口を言うのはやめてください<br>スタンプに関する文句は受け付けておりません。<br>また、スタンプラリーの用紙で自慢をする等の行為は禁止と<br>させていただきます。<br>リクエストはできる範囲で受け付けています。
+          </p>
+          <br><br>
+
+          <h2>のぶ子ドル没案</h2>
+          <div class="draft-gallery">
+            <img src="./media/1000.png" alt="1000ND" class="draft-img">
+            <img src="./media/100.png" alt="100ND" class="draft-img">
+            <img src="./media/10.png" alt="10ND" class="draft-img">
+            <img src="./media/芸術ドット.png" alt="芸術作品1" class="draft-img">
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- メインコンテンツエリア -->
-  <main class="content-area">
-    <div class="about-container">
-      
-      <!-- 大見出し -->
-      <h2>スタンプについてとメモ</h2>
-
-      <div class="description-text">
-        <h2>スタンプラリー</h2>
-        <p>
-          スタンプを貯めて景品をもらおう！<br>もらうには…<br>・授業態度を良くする<br>・のぶ子教に前向きな取り組み<br>・のぶ子教の歴史に詳しくなる<br>・みんなと仲良くする<br>働く人と消費者に分かれる<br>スタンプは森山と並木が昼休みにさせていただきます。<br>絶対にのぶ子等に悪口を言うのはやめてください<br>スタンプに関する文句は受け付けておりません。<br>また、スタンプラリーの用紙で自慢をする等の行為は禁止と<br>させていただきます。<br>リクエストはできる範囲で受け付けています。
-        </p>
-        <br><br>
-
-        <h2>のぶ子ドル没案</h2>
-        <div class="draft-gallery">
-          <img src="1000.png" alt="1000ND" class="draft-img">
-          <img src="100.png" alt="100ND" class="draft-img">
-          <img src="10.png" alt="10ND" class="draft-img">
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-</div>
-<!-- その他セクション ここまで -->
-
-  <!-- ============================================================
-       JavaScript セクション
-  ============================================================ -->
-
-  <!-- 1. パスワード & ナビゲーションロジック -->
-  <script>
-    const SECRET_WORD = "nobuko64";
-    const pwBtn = document.getElementById('pw-btn');
-    const pwInput = document.getElementById('pw-input');
-    const pwScreen = document.getElementById('password-screen');
-    const pwError = document.getElementById('pw-error');
-
-    // パスワード照合
-    function checkPassword() {
-      if (pwInput.value === SECRET_WORD) {
-        pwScreen.classList.add('fade-out');
-        setTimeout(() => { pwScreen.style.display = 'none'; }, 1500);
-      } else {
-        pwError.style.display = 'block';
-        pwInput.value = "";
-      }
-    }
-    pwBtn.onclick = checkPassword;
-    pwInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
-
-    // ページ切り替えロジック
-    function showSection() {
-      const hash = window.location.hash || '#home';
-      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-      const targetSec = document.querySelector(hash);
-      if (targetSec) targetSec.classList.add('active');
-
-      document.querySelectorAll('.menu-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('href') === hash) btn.classList.add('active');
-      });
-      window.scrollTo(0, 0); // 切り替え時に上端へ戻る
-    }
-
-    window.addEventListener('DOMContentLoaded', showSection);
-    window.addEventListener('hashchange', showSection);
-  </script>
-
-  <!-- 2. Firebase チャットロジック -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAPUhjD7Zg8togYokPISJcFYvvoRJBcIkk",
-      authDomain: "nobuko-f3d50.firebaseapp.com",
-      projectId: "nobuko-f3d50",
-      storageBucket: "nobuko-f3d50.firebasestorage.app",
-      messagingSenderId: "58905285751",
-      appId: "1:58905285751:web:66c687031ad8a9a746e272",
-      measurementId: "G-J9GSF1LFRC"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const listEl = document.getElementById('messages-list');
-    const sendBtn = document.getElementById('send-btn');
-    const msgInput = document.getElementById('message-input');
-    const nameInput = document.getElementById('user-name');
-
-    // メッセージ送信
-    sendBtn.onclick = async () => {
-      if(!msgInput.value) return;
-      await addDoc(collection(db, "messages"), {
-        name: nameInput.value || "無名",
-        text: msgInput.value,
-        timestamp: serverTimestamp()
-      });
-      msgInput.value = "";
-    };
-
-    // リアルタイム受信と表示
-    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
-    onSnapshot(q, (snapshot) => {
-      listEl.innerHTML = "";
-      let count = 1;
-      snapshot.forEach((sDoc) => {
-        const data = sDoc.data();
-        const item = document.createElement('div');
-        item.className = 'message-item';
-        item.innerHTML = `
-          <div class="msg-header">
-            <span>第 ${count} 柱</span>
-            <span>${data.name}</span>
-          </div>
-          <div class="msg-content">${data.text}</div>
-        `;
-        listEl.appendChild(item);
-        count++;
-      });
-      listEl.scrollTop = listEl.scrollHeight;
-    });
-
-    // 記録の全消去機能
-    document.getElementById('delete-all-btn').onclick = async () => {
-      if(!confirm("全ての記録を抹消しますか？")) return;
-      const snap = await getDocs(collection(db, "messages"));
-      const batch = writeBatch(db);
-      snap.forEach(d => batch.delete(d.ref));
-      await batch.commit();
-    };
-  </script>
+  <script src="./script.js"></script>
+  <script type="module" src="./firebase.js"></script>
 
 </body>
 </html>
