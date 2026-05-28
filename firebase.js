@@ -100,6 +100,10 @@ if (jobBoard) {
     jobBoard.innerHTML = "";
     if (adminNoticeList) adminNoticeList.innerHTML = ""; 
     
+    // ▼ ここから修正：挑戦中の任務があるかチェックする変数
+    let hasDoingTask = false; 
+    const adminNoticeBoard = document.querySelector('.admin-notice-board');
+    
     const now = Date.now();
     const ONE_DAY = 24 * 60 * 60 * 1000; 
 
@@ -109,36 +113,30 @@ if (jobBoard) {
 
       if (now - data.timestamp > ONE_DAY) return;
 
-      // ★ 通知エリアに複数並べる（管理者の場合のみ）
+      // 管理者の場合、進行中(doing)の案件があれば通知エリアに出す
       if (window.isAdmin && data.status === 'doing' && adminNoticeList) {
+        hasDoingTask = true; // 進行中の仕事が見つかった！
         const li = document.createElement('li');
         li.innerHTML = `<strong>${data.challenger}</strong> <span>【${data.title}】</span>`;
         adminNoticeList.appendChild(li);
       }
-
+      
+      /* --- (以下、カード作成のコードはそのまま) --- */
       const card = document.createElement('div');
       card.className = `job-card ${data.status === 'completed' ? 'completed' : ''}`;
-
+      
       let statusHtml = '';
       let actionHtml = '';
-      let challengerHtml = ''; // ★カードに表示する挑戦者名
+      let challengerHtml = '';
 
       if (data.status === 'open') {
         statusHtml = `<span class="status-badge status-open">募集中</span>`;
-        actionHtml = `
-          <input type="text" id="chal-${id}" placeholder="名を刻む">
-          <button onclick="acceptJob('${id}')">引き受ける</button>
-        `;
+        actionHtml = `<input type="text" id="chal-${id}" placeholder="名を刻む"><button onclick="acceptJob('${id}')">引き受ける</button>`;
       } else if (data.status === 'doing') {
         statusHtml = `<span class="status-badge status-doing">進行中</span>`;
-        challengerHtml = `<div class="challenger-name">挑戦者：${data.challenger}</div>`; // ★追加
-        
+        challengerHtml = `<div class="challenger-name">挑戦者：${data.challenger}</div>`;
         if (window.isAdmin) {
-          // ★管理者は「完了」と「取り下げ」ができる
-          actionHtml = `
-            <button class="btn-cancel" onclick="cancelJob('${id}')">取り下げ</button>
-            <button onclick="completeJob('${id}')" style="background:#a00;">任務完了</button>
-          `;
+          actionHtml = `<button class="btn-cancel" onclick="cancelJob('${id}')">取り下げ</button><button onclick="completeJob('${id}')" style="background:#a00;">任務完了</button>`;
         } else {
           actionHtml = `<span style="font-size:12px; color:#666;">管理者に報告せよ</span>`;
         }
@@ -149,10 +147,7 @@ if (jobBoard) {
       }
 
       card.innerHTML = `
-        <div class="job-header">
-          ${statusHtml}
-          <span class="job-reward">報酬: ${data.reward} スタンプ</span>
-        </div>
+        <div class="job-header">${statusHtml}<span class="job-reward">報酬: ${data.reward} スタンプ</span></div>
         <h4 class="job-title">${data.title}</h4>
         <p class="job-desc">${data.desc}</p>
         ${challengerHtml}
@@ -160,6 +155,15 @@ if (jobBoard) {
       `;
       jobBoard.appendChild(card);
     });
+
+    // ▼ ここで「枠を表示するかどうか」を切り替える
+    if (adminNoticeBoard) {
+      if (hasDoingTask) {
+        adminNoticeBoard.style.display = 'block'; // 誰か挑戦中なら出す
+      } else {
+        adminNoticeBoard.style.display = 'none';  // 誰もいなければ隠す
+      }
+    }
   });
 }
 
