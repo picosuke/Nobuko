@@ -579,3 +579,34 @@ body {
   border: 2px solid #333;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
+
+
+/* ============================================================
+   11.管理者や仕事掲示板
+============================================================ */
+#admin-area { margin-bottom: 40px; }
+
+/* 通知エリア（赤枠で目立たせる） */
+.admin-notice-board {
+  background-color: #fff0f0;
+  border: 2px solid #a00;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.admin-notice-board h3 { margin-top: 0; color: #a00; font-size: 18px; }
+.admin-notice-board ul { list-style: none; padding: 0; margin: 0; }
+.admin-notice-board li { 
+  font-size: 18px; font-weight: bold; border-bottom: 1px dashed #a00; padding: 10px 0; 
+}
+.admin-notice-board li span { color: #555; font-size: 14px; font-weight: normal; margin-left: 10px; }
+
+/* 依頼作成フォーム */
+.admin-job-form {
+  background-color: #eee; border: 2px dashed #333; padding: 20px;
+}
+.admin-job-form h3 { margin-top: 0; font-size: 20px; }
+.admin-job-form input, .admin-job-form textarea {
+  width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; font-family: inherit; box-sizing: border-box;
+}
+.admin-job-form .form-row { display: flex; gap: 10px; align-items: center; }
+#add-job-btn { background: #333; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
