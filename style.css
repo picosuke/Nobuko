@@ -625,7 +625,7 @@ body {
 
 /* 依頼カードの外枠 */
 .job-card {
-  width: calc(50% - 10px); 
+  width: calc(100% - 50px); 
   background-color: #fff; 
   border: 2px solid #333;
   padding: 20px; 
