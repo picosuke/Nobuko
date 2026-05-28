@@ -1,6 +1,6 @@
 // パスワード設定（一般用と管理者用の2種類）
 const NORMAL_WORD = "nobuko64";      // 一般信者用の合言葉
-const ADMIN_WORD = "morinami2026";   // ★管理者（森山・並木）用の合言葉
+const ADMIN_WORD = "pronobuko25";
 
 const pwBtn = document.getElementById('pw-btn');
 const pwInput = document.getElementById('pw-input');
