@@ -66,10 +66,9 @@ document.getElementById('delete-all-btn').onclick = async () => {
   await batch.commit();
 };
 
-
-// ==========================================
-// 仕事掲示板（クエスト）の処理
-// ==========================================
+/* ============================================================
+   仕事掲示板（クエスト）機能
+============================================================ */
 const jobBoard = document.getElementById('job-board');
 const addJobBtn = document.getElementById('add-job-btn');
 const adminNoticeList = document.getElementById('admin-notice-list');
@@ -100,12 +99,14 @@ if (jobBoard) {
     jobBoard.innerHTML = "";
     if (adminNoticeList) adminNoticeList.innerHTML = ""; 
     
-    // ▼ ここから修正：挑戦中の任務があるかチェックする変数
     let hasDoingTask = false; 
     const adminNoticeBoard = document.querySelector('.admin-notice-board');
     
     const now = Date.now();
     const ONE_DAY = 24 * 60 * 60 * 1000; 
+
+    // ★ ここで「自分が管理者かどうか」をブラウザの記憶から確認する
+    const iAmAdmin = (localStorage.getItem('isAdmin') === 'true');
 
     snapshot.forEach((sDoc) => {
       const data = sDoc.data();
@@ -113,30 +114,37 @@ if (jobBoard) {
 
       if (now - data.timestamp > ONE_DAY) return;
 
-      // 管理者の場合、進行中(doing)の案件があれば通知エリアに出す
-      if (window.isAdmin && data.status === 'doing' && adminNoticeList) {
-        hasDoingTask = true; // 進行中の仕事が見つかった！
+      // 管理者の場合のみ、通知エリアに出す
+      if (iAmAdmin && data.status === 'doing' && adminNoticeList) {
+        hasDoingTask = true;
         const li = document.createElement('li');
         li.innerHTML = `<strong>${data.challenger}</strong> <span>【${data.title}】</span>`;
         adminNoticeList.appendChild(li);
       }
-      
-      /* --- (以下、カード作成のコードはそのまま) --- */
+
       const card = document.createElement('div');
       card.className = `job-card ${data.status === 'completed' ? 'completed' : ''}`;
-      
+
       let statusHtml = '';
       let actionHtml = '';
       let challengerHtml = '';
 
       if (data.status === 'open') {
         statusHtml = `<span class="status-badge status-open">募集中</span>`;
-        actionHtml = `<input type="text" id="chal-${id}" placeholder="名を刻む"><button onclick="acceptJob('${id}')">引き受ける</button>`;
+        actionHtml = `
+          <input type="text" id="chal-${id}" placeholder="名を刻む">
+          <button onclick="acceptJob('${id}')">引き受ける</button>
+        `;
       } else if (data.status === 'doing') {
         statusHtml = `<span class="status-badge status-doing">進行中</span>`;
         challengerHtml = `<div class="challenger-name">挑戦者：${data.challenger}</div>`;
-        if (window.isAdmin) {
-          actionHtml = `<button class="btn-cancel" onclick="cancelJob('${id}')">取り下げ</button><button onclick="completeJob('${id}')" style="background:#a00;">任務完了</button>`;
+        
+        // ★ 管理者の場合、取り下げと完了ボタンを出す
+        if (iAmAdmin) {
+          actionHtml = `
+            <button class="btn-cancel" onclick="cancelJob('${id}')">取り下げ</button>
+            <button onclick="completeJob('${id}')" style="background:#a00;">任務完了</button>
+          `;
         } else {
           actionHtml = `<span style="font-size:12px; color:#666;">管理者に報告せよ</span>`;
         }
@@ -147,7 +155,10 @@ if (jobBoard) {
       }
 
       card.innerHTML = `
-        <div class="job-header">${statusHtml}<span class="job-reward">報酬: ${data.reward} スタンプ</span></div>
+        <div class="job-header">
+          ${statusHtml}
+          <span class="job-reward">報酬: ${data.reward} スタンプ</span>
+        </div>
         <h4 class="job-title">${data.title}</h4>
         <p class="job-desc">${data.desc}</p>
         ${challengerHtml}
@@ -156,12 +167,11 @@ if (jobBoard) {
       jobBoard.appendChild(card);
     });
 
-    // ▼ ここで「枠を表示するかどうか」を切り替える
     if (adminNoticeBoard) {
-      if (hasDoingTask) {
-        adminNoticeBoard.style.display = 'block'; // 誰か挑戦中なら出す
+      if (hasDoingTask && iAmAdmin) { // ★ 管理者で、かつ任務がある時だけ枠を出す
+        adminNoticeBoard.style.display = 'block';
       } else {
-        adminNoticeBoard.style.display = 'none';  // 誰もいなければ隠す
+        adminNoticeBoard.style.display = 'none';
       }
     }
   });
@@ -181,7 +191,7 @@ window.completeJob = async (id) => {
   await updateDoc(doc(db, "jobs", id), { status: "completed" });
 };
 
-// 5. 取り下げ（キャンセル）する ★新規追加
+// 5. 取り下げ（キャンセル）する
 window.cancelJob = async (id) => {
   if(!confirm("この者の挑戦を取り消し、再び募集中に戻しますか？")) return;
   await updateDoc(doc(db, "jobs", id), { status: "open", challenger: "" });
