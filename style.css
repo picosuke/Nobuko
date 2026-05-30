@@ -630,6 +630,7 @@ body {
 /* 依頼カードの外枠（横幅と高さを固定して綺麗に揃える） */
 .job-card {
   width: 400px; /* ★横幅を400pxで固定 */
+  text-align: left;
   min-height: 280px; /* ★最低限の高さを確保 */
   display: flex;
   flex-direction: column; /* 中身を縦に並べる設定 */
@@ -711,9 +712,14 @@ body {
   border: none; 
 }
 
+.work-container {
+    width: 50%;
+    text-align: center;
+}
+
 /* スマホ表示用（画面が狭い時は横幅を100%にする） */
 @media (max-width: 768px) {
-  .job-card { width: 100%; }
+  .work-container { width: 100%; }
 }
 /* ============================================================
    ★ スマホ用レスポンシブ（ヘッダーのつぶれ対策） ★
