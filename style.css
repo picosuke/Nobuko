@@ -1,4 +1,621 @@
 /* ============================================================
+   1. 基本設定 & 共通パーツ (06風デザイン)
+============================================================ */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Yu Mincho', 'Sawarabi Mincho', serif;
+  background-color: #f9f9f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.top-stripe {
+  height: 12px;
+  background: repeating-linear-gradient(to right, #e0e0db, #e0e0db 4px, #f9f9f5 4px, #f9f9f5 8px);
+}
+
+.header-06 {
+  height: 90px;
+  background-color: #f9f9f5;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-06 .logo {
+  font-size: 28px;
+  letter-spacing: 4px;
+}
+
+.header-06 .nav {
+  display: flex;
+  gap: 60px;
+}
+
+.header-06 .nav a {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 3px;
+  transition: all 0.3s;
+  padding-bottom: 5px;
+  border-bottom: 1px solid transparent;
+}
+
+.header-06 .nav a:hover,
+.header-06 .nav a.active {
+  color: #888;
+  border-bottom: 1px solid #888;
+}
+
+/* ============================================================
+   2. 各ページの共通レイアウト
+============================================================ */
+.page-section {
+  display: none;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.page-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-area {
+  height: 400px;
+  background-color: #ebebe6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  max-width: 100%;
+}
+
+.hero-area h1 {
+  margin: 0;
+  color: #999;
+  font-size: 24px;
+  letter-spacing: 6px;
+}
+
+.hero-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-area {
+  min-height: 500px;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-area h2 {
+  font-size: 28px;
+  letter-spacing: 4px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+}
+
+/* ============================================================
+   3. ホーム画面専用スタイル (#home)
+============================================================ */
+.manifesto-inner {
+  width: 90%;
+  max-width: 850px;
+  text-align: center;
+}
+
+.catchphrase {
+  font-size: 32px;
+  line-height: 1.8;
+  margin-bottom: 80px;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.catchphrase span {
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+.manifesto-body p {
+  font-size: 22px;
+  line-height: 2.2;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+.home-footer-deco {
+  margin-top: 60px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+  display: inline-block;
+  letter-spacing: 6px;
+  color: #999;
+}
+
+/* ============================================================
+   4. 聖約ページ専用スタイル (#covenant)
+============================================================ */
+.about-container {
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.description-text {
+  font-size: 22px;
+  line-height: 2.2;
+  letter-spacing: 2px;
+}
+
+.rules-box {
+  margin: 60px auto;
+  padding: 60px 40px;
+  border: 2px solid #333;
+  background-color: #fdfdfb;
+  text-align: left;
+}
+
+.rules-box h3 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: 10px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 15px;
+}
+
+.rules-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rules-box li {
+  margin-bottom: 40px;
+  border-left: 3px solid #333;
+  padding-left: 25px;
+}
+
+.rules-box li strong {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 10px;
+  letter-spacing: 4px;
+}
+
+.rules-box li p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+}
+
+/* ============================================================
+   5. 歴史ページ専用スタイル (#history)
+============================================================ */
+.history-container {
+  width: 90%;
+  max-width: 800px;
+}
+
+.timeline {
+  padding: 20px 0;
+  margin-top: 50px;
+  text-align: left;
+  border-left: 2px solid #333;
+}
+
+.time-item {
+  position: relative;
+  margin-bottom: 50px;
+  padding-left: 40px;
+}
+
+.time-item::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #f9f9f5;
+  border: 2px solid #333;
+  border-radius: 50%;
+}
+
+.year {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.time-item p {
+  font-size: 22px;
+  line-height: 1.8;
+  letter-spacing: 1.5px;
+}
+
+.highlight::before {
+  background-color: #333;
+}
+
+.highlight .year {
+  font-size: 28px;
+  text-decoration: underline;
+}
+
+.next .year {
+  color: #800;
+  font-size: 28px;
+}
+
+/* ============================================================
+   6. 話し合い（チャット）専用スタイル (#discussion)
+============================================================ */
+#chat-wrapper {
+  width: 95%;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+#messages-list {
+  height: 400px;
+  overflow-y: auto;
+  background-color: #fdfdfb;
+  border: 2px solid #333;
+  padding: 30px;
+  margin-bottom: 25px;
+}
+
+.message-item {
+  border-bottom: 1px solid #ddd;
+  padding: 30px 0;
+  text-align: left;
+}
+
+.msg-header {
+  font-size: 16px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.msg-content {
+  font-size: 22px;
+  color: #111;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.chat-controls {
+  background: #f9f9f5;
+  padding: 30px;
+  border: 2px solid #333;
+}
+
+.input-row {
+  display: flex;
+  gap: 15px;
+}
+
+#user-name { width: 140px; padding: 15px; border: 1px solid #333; font-family: inherit; font-size: 18px; }
+#message-input { flex-grow: 1; padding: 15px; border: 1px solid #333; font-family: inherit; font-size: 18px; }
+
+#send-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0 40px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 18px;
+  letter-spacing: 4px;
+  transition: background 0.3s;
+}
+
+#send-btn:hover { background: #555; }
+
+.admin-area {
+  text-align: right;
+  margin-top: 20px;
+}
+
+#delete-all-btn {
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   7. 信者ページ専用スタイル (#nobuko)
+============================================================ */
+.believer-container {
+  width: 90%;
+  max-width: 850px;
+  text-align: center;
+}
+
+.believer-count-box {
+  margin-bottom: 60px;
+  padding: 40px;
+  background-color: #f0f0eb;
+  border: 1px solid #333;
+}
+
+.count-label {
+  font-size: 18px;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.count-number {
+  font-size: 56px;
+  font-weight: bold;
+  letter-spacing: 10px;
+  color: #111;
+}
+
+.count-number span {
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.count-sub {
+  font-size: 14px;
+  color: #888;
+  margin-top: 10px;
+}
+
+.voice-section {
+  margin-top: 80px;
+  text-align: left;
+}
+
+.voice-section h3 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: 4px;
+}
+
+.voice-item {
+  margin-bottom: 50px;
+  padding: 30px;
+  border-bottom: 1px dotted #ccc;
+  position: relative;
+}
+
+.voice-item::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-size: 60px;
+  color: #eee;
+  font-family: serif;
+}
+
+.voice-text {
+  font-size: 22px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.voice-name {
+  text-align: right;
+  font-size: 16px;
+  color: #666;
+  letter-spacing: 2px;
+}
+
+.join-guide {
+  margin-top: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #800;
+}
+
+/* ============================================================
+   8. パスワード画面スタイル
+============================================================ */
+#password-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f5;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-content {
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
+
+.pw-label {
+  font-size: 24px;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+}
+
+#pw-input {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 15px;
+  width: 250px;
+  border: 1px solid #333;
+  background: none;
+  font-size: 20px;
+  text-align: center;
+  outline: none;
+}
+
+#pw-btn {
+  padding: 10px 40px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+#pw-error {
+  margin-top: 20px;
+  color: #800;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1.5s ease;
+}
+
+/* ============================================================
+   9. 経済ページ専用スタイル (#economy)
+============================================================ */
+.economy-container {
+  width: 90%;
+  max-width: 850px;
+}
+
+.shop-section {
+  margin-bottom: 80px;
+}
+
+.shop-section h3, .currency-section h3 {
+  font-size: 28px;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.shop-card {
+  background-color: #fff;
+  border: 1px solid #333;
+  padding: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.shop-card h4 {
+  font-size: 24px;
+  margin: 0 0 15px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.shop-desc {
+  font-size: 20px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.currency-info {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.currency-info strong {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+  color: #800;
+}
+
+.how-to-get h4, .tax-info h4 {
+  font-size: 22px;
+  border-left: 5px solid #333;
+  padding-left: 15px;
+  margin: 40px 0 20px 0;
+}
+
+.how-to-get p, .tax-info p {
+  font-size: 22px;
+  line-height: 2;
+  color: #333;
+}
+
+.tax-info {
+  margin-top: 60px;
+  padding: 20px;
+  background-color: #fff0f0;
+  border: 1px dashed #800;
+}
+
+/* ============================================================
+   10. デザイン
+============================================================ */
+
+.draft-img {
+  width: auto;
+  height: 200px;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+
+/* ============================================================
+   11.管理者や仕事掲示板
+============================================================ */
+#admin-area { margin-bottom: 40px; }
+
+.admin-notice-board {
+  background-color: #fff0f0; border: 1px solid #a00; padding: 10px 15px; margin-bottom: 20px;
+  max-height: 150px; overflow-y: auto;
+}
+.admin-notice-board h3 { margin: 0 0 10px 0; color: #a00; font-size: 14px; }
+.admin-notice-board ul { list-style: none; padding: 0; margin: 0; }
+.admin-notice-board li { 
+  font-size: 12px; border-bottom: 1px dashed #fbb; padding: 5px 0; display: flex; justify-content: space-between;
+}
+.admin-notice-board li span { color: #555; }
+
+/* 依頼作成フォーム */
+.admin-job-form {
+  background-color: #eee; border: 2px dashed #333; padding: 20px;
+}
+.admin-job-form h3 { margin-top: 0; font-size: 20px; }
+.admin-job-form input, .admin-job-form textarea {
+  width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; font-family: inherit; box-sizing: border-box;
+}
+.admin-job-form .form-row { display: flex; gap: 10px; align-items: center; }
+#add-job-btn { background: #333; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
+
+/* ============================================================
    12. 掲示板カード・ステータス・ハンコのデザイン
 ============================================================ */
 
