@@ -623,14 +623,16 @@ body {
 .job-board { 
   display: flex; 
   flex-wrap: wrap; 
-  gap: 20px; /* カードとカードの隙間 */
-  justify-content: flex-start; /* 左詰めから綺麗に並べる */
+  gap: 20px; 
+  justify-content: center; 
 }
 
-/* 依頼カードの外枠（ここで2列になるよう計算） */
+/* 依頼カードの外枠（横幅と高さを固定して綺麗に揃える） */
 .job-card {
-  /* 50%から隙間の分（10px）を引くことで、確実に2個並んで改行されます */
-  width: calc(50% - 10px); 
+  width: 400px; /* ★横幅を400pxで固定 */
+  min-height: 280px; /* ★最低限の高さを確保 */
+  display: flex;
+  flex-direction: column; /* 中身を縦に並べる設定 */
   background-color: #fff; 
   border: 2px solid #333;
   padding: 20px; 
@@ -663,11 +665,21 @@ body {
   letter-spacing: 1px; 
 }
 
+/* 依頼内容の文章（長すぎたらスクロールさせる） */
 .job-desc { 
   font-size: 15px; 
   color: #444; 
   margin-bottom: 20px; 
+  line-height: 1.6;
+  flex-grow: 1; /* ★余った高さを埋める（ボタンを一番下に押し下げる魔法） */
+  max-height: 150px; /* ★これ以上長くなったら */
+  overflow-y: auto; /* ★縦にスクロールできるようにする */
+  padding-right: 5px; /* スクロールバーとの隙間 */
 }
+
+/* スクロールバーのデザイン（スクロールが出た時だけ細く表示） */
+.job-desc::-webkit-scrollbar { width: 4px; }
+.job-desc::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
 
 /* ステータスバッジ */
 .status-badge { 
@@ -676,14 +688,15 @@ body {
   color: #fff; 
   letter-spacing: 1px; 
 }
-.status-open { background-color: #228b22; } /* 募集中 */
-.status-doing { background-color: #b8860b; } /* 挑戦中 */
+.status-open { background-color: #228b22; }
+.status-doing { background-color: #b8860b; }
 
-/* アクションエリア */
+/* アクションエリア（ボタンなど） */
 .job-action { 
   text-align: right; 
   border-top: 1px solid #eee; 
   padding-top: 10px; 
+  margin-top: auto; /* ★必ずカードの一番下に配置されるようにする */
 }
 .job-action input { 
   padding: 5px; 
@@ -698,31 +711,10 @@ body {
   border: none; 
 }
 
-/* 完了済みのハンコ風 */
-.job-card.completed { 
-  opacity: 0.6; 
-  pointer-events: none; 
+/* スマホ表示用（画面が狭い時は横幅を100%にする） */
+@media (max-width: 768px) {
+  .job-card { width: 100%; }
 }
-.completed-stamp {
-  position: absolute; 
-  top: 40%; 
-  left: 50%; 
-  transform: translate(-50%, -50%) rotate(-15deg);
-  color: #a00; 
-  border: 4px solid #a00; 
-  padding: 10px 20px; 
-  font-size: 30px; 
-  font-weight: bold; 
-  letter-spacing: 5px; 
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.btn-cancel { background: #666 !important; margin-right: 5px; }
-
-.challenger-name { font-weight: bold; color: #b8860b; font-size: 14px; margin-bottom: 10px; }
-
-
 /* ============================================================
    ★ スマホ用レスポンシブ（ヘッダーのつぶれ対策） ★
 ============================================================ */
