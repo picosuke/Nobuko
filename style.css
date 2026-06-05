@@ -265,7 +265,7 @@ body {
 }
 
 /* ============================================================
-   6. 話し合い（チャット）専用スタイル (#discussion)
+   6. 話し合いのスタイル、ノブAIのスタイル
 ============================================================ */
 #chat-wrapper {
   width: 95%;
@@ -346,6 +346,46 @@ body {
   background: none;
   text-decoration: underline;
 }
+
+/* ============================================================
+   AIボット専用スタイル (#oracle)
+============================================================ */
+.oracle-container { width: 90%; max-width: 600px; margin: 0 auto; }
+
+#oracle-chat-box {
+  background-color: #111; /* 端末っぽく黒背景 */
+  border: 4px solid #333;
+  height: 400px;
+  overflow-y: auto;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: monospace; /* プログラム風のフォント */
+}
+
+.oracle-msg { margin-bottom: 20px; clear: both; }
+.oracle-name { display: block; font-size: 12px; margin-bottom: 5px; font-weight: bold; }
+
+/* ボットのメッセージ（左側・緑色） */
+.oracle-msg.bot .oracle-name { color: #0f0; }
+.oracle-msg.bot p {
+  background-color: #222; color: #0f0;
+  display: inline-block; padding: 10px 15px; margin: 0;
+  border-left: 3px solid #0f0;
+}
+
+/* 自分のメッセージ（右側・白色） */
+.oracle-msg.user { text-align: right; }
+.oracle-msg.user .oracle-name { color: #aaa; }
+.oracle-msg.user p {
+  background-color: #333; color: #fff;
+  display: inline-block; padding: 10px 15px; margin: 0;
+  border-right: 3px solid #ccc; text-align: left;
+}
+
+.oracle-input-area { display: flex; gap: 10px; }
+#oracle-input { flex-grow: 1; padding: 10px; border: 2px solid #333; font-size: 16px; background: #eee; }
+#oracle-send-btn { background: #333; color: #fff; padding: 0 20px; border: none; cursor: pointer; letter-spacing: 2px; }
+
 
 /* ============================================================
    7. 信者ページ専用スタイル (#nobuko)
