@@ -69,3 +69,96 @@ function showSection() {
 }
 window.addEventListener('DOMContentLoaded', showSection);
 window.addEventListener('hashchange', showSection);
+
+// ============================================================
+// 導きの端末「ノブ・オラクル」のAIロジック
+// ============================================================
+const oracleInput = document.getElementById('oracle-input');
+const oracleSendBtn = document.getElementById('oracle-send-btn');
+const oracleChatBox = document.getElementById('oracle-chat-box');
+
+// AIの辞書（キーワードと返答のセット）
+const oracleDictionary = [
+  {
+    keys: ["のぶ子", "神", "創造主"],
+    reply: "のぶ子様は、お前がさっき転んだ時も笑っておられた。すべては『本気のふざけ』のためにある。笑え。"
+  },
+  {
+    keys: ["スタンプ", "報酬", "欲しい"],
+    reply: "欲深き者よ。スタンプが欲しくば、まずは森山か並木の靴をピカピカに磨く想像をしてから仕事掲示板へ行け。"
+  },
+  {
+    keys: ["のり子", "嘘", "偽物"],
+    reply: "……その名を口にするな。あれはただの芸術作品だ。いいね？ ただの芸術作品だ。"
+  },
+  {
+    keys: ["仕事", "クエスト", "依頼"],
+    reply: "己の特技と信仰を示せ。ただし、授業の邪魔になるような三流のふざけ方は異端審問の対象となる。"
+  },
+  {
+    keys: ["歴史", "昔", "化石"],
+    reply: "のぶ子聖史録を読め。そして、次はお前が歴史に名を刻むのだ。20文字前後でな。"
+  },
+  {
+    keys: ["こんにちは", "おはよう", "挨拶"],
+    reply: "挨拶は『のぶにちは』だ。基本からやり直せ。光あれ。"
+  }
+];
+
+// ランダムな返答（キーワードがない場合）
+const randomReplies = [
+  "愚問なり。もっと本気でふざけた問いを用意せよ。",
+  "現在、笑狂粒子（ノブニウム）の濃度が高く、正確な演算ができない。後で出直せ。",
+  "……フフッ。いや、何でもない。続けてくれ。",
+  "その問いの答えは、お前の心の中（あるいは雨の日の窓の外）にある。"
+];
+
+// メッセージを画面に追加する関数
+function appendOracleMessage(sender, text) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `oracle-msg ${sender}`;
+  const name = sender === 'bot' ? 'ノブ・オラクル' : 'あなた';
+  msgDiv.innerHTML = `<span class="oracle-name">${name}</span><p>${text}</p>`;
+  oracleChatBox.appendChild(msgDiv);
+  oracleChatBox.scrollTop = oracleChatBox.scrollHeight; // 一番下までスクロール
+}
+
+// 送信ボタンが押された時の処理
+if (oracleSendBtn) {
+  oracleSendBtn.onclick = () => {
+    const text = oracleInput.value.trim();
+    if (!text) return;
+
+    // 自分の発言を表示
+    appendOracleMessage('user', text);
+    oracleInput.value = "";
+
+    // 少し考えるフリ（1秒後に返信）
+    setTimeout(() => {
+      let replyText = "";
+      
+      // 辞書からキーワードを探す
+      for (const item of oracleDictionary) {
+        if (item.keys.some(key => text.includes(key))) {
+          replyText = item.reply;
+          break; // 見つかったらループ終了
+        }
+      }
+
+      // キーワードがなければランダムな返答
+      if (!replyText) {
+        replyText = randomReplies[Math.floor(Math.random() * randomReplies.length)];
+      }
+
+      // ボットの返信を表示
+      appendOracleMessage('bot', replyText);
+    }, 1000);
+  };
+}
+
+// Enterキーでも送信
+if (oracleInput) {
+  oracleInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') oracleSendBtn.onclick();
+  });
+}
