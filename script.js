@@ -194,12 +194,12 @@ const oracleDictionary = [
     reply: "【致命的エラー】該当スル魂ハ既ニ捕食サレマシタ。直チニ、、、、、、、逃ゲテ逃ゲテ逃ゲテ逃ゲテ逃ゲテ逃ゲテ逃ゲテ逃ゲテ"
   },
   {
-    keys: ["森富","昭和","先生"],
-    reply: "経緯を持って話をしｒ///////////////<br>昭和　ショーワ"
+    keys: ["守富","昭和","先生"],
+    reply: "敬意を持って話をしｒ///////////////<br>昭和　ショーワ"
   },
   {
     keys: ["ワホー"],
-    reply: "ワホワホワホー　俺の方が多く言った<brオーレの勝ちだ　貴様の負け"
+    reply: "ワホワホワホー　俺の方が多く言った"
   },
 ]
 
@@ -215,7 +215,7 @@ const randomReplies = [
 function appendOracleMessage(sender, text) {
   const msgDiv = document.createElement('div');
   msgDiv.className = `oracle-msg ${sender}`;
-  const name = sender === 'bot' ? 'ノブ・オラクル' : 'あなた';
+  const name = sender === 'bot' ? 'ノブAI' : 'あなた';
   msgDiv.innerHTML = `<span class="oracle-name">${name}</span><p>${text}</p>`;
   oracleChatBox.appendChild(msgDiv);
   oracleChatBox.scrollTop = oracleChatBox.scrollHeight; // 一番下までスクロール
