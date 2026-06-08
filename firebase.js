@@ -112,8 +112,6 @@ if (jobBoard) {
       const data = sDoc.data();
       const id = sDoc.id;
 
-      if (now - data.timestamp > ONE_DAY) return;
-
       // 管理者の場合のみ、通知エリアに出す
       if (iAmAdmin && data.status === 'doing' && adminNoticeList) {
         hasDoingTask = true;
